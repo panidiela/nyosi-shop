@@ -7,15 +7,15 @@
 - Secteur : gâteaux, pagnes, cosmétiques, plats cuisinés, vêtements, artisanat
 - Téléphone : Android Samsung, Tecno ou Itel
 - Utilise WhatsApp Business ou WhatsApp Personnel
-- Poste 3–10 photos par semaine sur WhatsApp Status et Facebook
-- Reçoit 20–100 messages par jour en période active
+- Poste 3–10 photos par semaine sur WhatsApp Status, Facebook (stories, posts, groupes, marketplace)
+- Reçoit 20–100 messages par jour en période active — sur WhatsApp ET dans les commentaires Facebook
 - N'a pas de site web, pas de terminal de paiement
 
 ## Douleurs documentées
 
 ### Douleur 1 : Les mêmes questions en boucle
 "C'est combien ?" / "Tu livres à Bastos ?" / "T'as encore du stock ?"
-Le vendeur répond 50 fois par jour aux mêmes questions. C'est épuisant et ça prend du temps qu'il n'a pas.
+Le vendeur répond 50 fois par jour aux mêmes questions — sur WhatsApp ET dans les commentaires Facebook. C'est épuisant et ça prend du temps qu'il n'a pas.
 
 ### Douleur 2 : Les commandes oubliées
 "J'avais dit que je prenais 2, tu te souviens ?"
@@ -33,11 +33,11 @@ Le soir, le vendeur a tapé sur son téléphone toute la journée. Il a géré 5
 
 ## Comportements observés à Yaoundé
 
-- Les vendeurs postent leurs produits sur WhatsApp Status chaque matin
-- Les commandes arrivent principalement entre 7h–9h et 12h–14h
+- Les vendeurs postent leurs produits sur WhatsApp Status chaque matin ET sur Facebook (posts, stories, groupes)
+- Les commandes arrivent principalement entre 7h–9h et 12h–14h — par message WhatsApp et commentaires Facebook
 - Le paiement Mobile Money est naturel — tout le monde sait faire MTN MoMo
 - Les clients font plus confiance à un vendeur qu'ils connaissent déjà
-- Un lien dans un message WhatsApp est cliqué naturellement
+- Un lien dans un message WhatsApp ou un post Facebook est cliqué naturellement
 - Les clients veulent une confirmation rapide — sinon ils doutent et ils relancent
 
 ## Ce que les vendeurs veulent vraiment
@@ -48,8 +48,8 @@ Le soir, le vendeur a tapé sur son téléphone toute la journée. Il a géré 5
 
 ## Questions à poser en interview terrain
 1. Tu vends quoi et depuis combien de temps ?
-2. Tu utilises WhatsApp comment pour tes ventes ?
-3. Combien de messages tu reçois par jour ?
+2. Tu utilises WhatsApp comment pour tes ventes ? Et Facebook ?
+3. Combien de messages tu reçois par jour ? Et de commentaires Facebook ?
 4. Tu as déjà perdu une vente parce que tu as répondu trop tard ?
 5. Tu as déjà oublié une commande ?
 6. Comment tu sais qui a payé et qui n'a pas payé ?

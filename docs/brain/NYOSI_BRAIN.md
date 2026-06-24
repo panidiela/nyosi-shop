@@ -1,8 +1,8 @@
 # NYOSI — Brain du projet
 
 ## Vision
-Nyosi est la boutique en ligne instantanée pour les commerçants africains francophones aujourd'hui et anglophone plus  tard.
-En 2 minutes, n'importe quel vendeur crée sa boutique, obtient un lien, le partage sur WhatsApp et Facebook, et commence à recevoir des commandes payées automatiquement.
+Nyosi est la boutique en ligne instantanée pour les commerçants africains francophones aujourd'hui et anglophone plus tard.
+En 2 minutes, n'importe quel vendeur crée sa boutique, obtient un lien, le partage sur WhatsApp et Facebook, et commence à recevoir des commandes automatiques — sans qu'aucun client n'ait besoin de lui envoyer un message.
 
 ## Origine du nom
 Nyosi signifie "abeille" en langue africaine — symbole de travail, d'organisation et de commerce. Une abeille qui travaille sans se perdre dans le chaos.
@@ -10,19 +10,19 @@ Nyosi signifie "abeille" en langue africaine — symbole de travail, d'organisat
 ## Le problème résolu
 Les commerçants africains vendent sur WhatsApp et Facebook. Résultat : des dizaines de messages par jour, des commandes oubliées, des paiements flous, des ventes perdues parce qu'on a répondu trop tard.
 
-WhatsApp est fait pour discuter. Pas pour vendre.
+WhatsApp et Facebook sont faits pour discuter et poster. Pas pour vendre.
 
 ## La solution
 Un lien. Une boutique. Des commandes automatiques.
 
 Le commerçant crée sa boutique Nyosi en 2 minutes.
 Il obtient un lien : nyosi.cm/marie-gateaux
-Il le met dans sa bio WhatsApp, ses stories Facebook, ses messages.
+Il le met dans sa bio WhatsApp, ses stories Facebook, ses posts, ses messages.
 Le client clique, commande, paie en Mobile Money.
 Le vendeur reçoit une notification. Aucun message à gérer.
 
 ## Proposition de valeur
-"Transforme tes messages WhatsApp en commandes automatiques."
+"Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message."
 
 ## Ce que Nyosi fait concrètement
 
@@ -44,8 +44,8 @@ Le vendeur reçoit une notification. Aucun message à gérer.
 - Commerçant solopreneur ou micro-entreprise 1–3 personnes
 - Secteur : alimentation, mode, beauté, artisanat, gâteaux, pagnes, cosmétiques
 - Téléphone : Android (90%+ du marché camerounais)
-- Vend actuellement sur WhatsApp et Facebook
-- Clients actifs : 20–300 sur WhatsApp
+- Vend actuellement sur WhatsApp et Facebook (posts, stories, groupes, marketplace)
+- Clients actifs : 20–300 sur WhatsApp et Facebook
 - Zones prioritaires : Yaoundé, Douala — puis Abidjan, Dakar
 
 ## Lien avec Nyosi Caisse
@@ -57,8 +57,9 @@ Nyosi est une marque. Deux produits :
 
 ## Pourquoi maintenant
 - MTN MoMo et Orange Money sont ancrés dans les habitudes camerounaises
-- Les gens cliquent sur les liens WhatsApp naturellement
-- Personne n'a encore fait ce produit simple, francophone, mobile first
+- Les gens cliquent sur les liens WhatsApp et Facebook naturellement
+- Les vendeurs sont déjà sur WhatsApp et Facebook — Nyosi s'intègre dans ce qu'ils font déjà
+- Personne n'a encore fait ce produit simple, francophone, mobile first, WhatsApp + Facebook First
 - Pani est lui-même le client cible — il connaît la douleur de l'intérieur
 
 ## Règle fondamentale

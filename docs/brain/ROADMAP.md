@@ -5,7 +5,7 @@ Objectif : confirmer que les clients d'un vendeur utilisent vraiment le lien pou
 
 - [ ] Identifier 3 vendeurs dans l'entourage de Pani (Yaoundé)
 - [ ] Créer une boutique test manuellement (page HTML simple sur Vercel)
-- [ ] Le vendeur partage le lien sur WhatsApp et Facebook
+- [ ] Le vendeur partage le lien sur WhatsApp (bio, messages, status) et Facebook (posts, stories, groupes)
 - [ ] Observer : est-ce que des clients cliquent et commandent ?
 - [ ] Critère de passage : 3 commandes reçues via le lien en 1 semaine
 
@@ -33,7 +33,7 @@ Objectif : le client paie directement, la commande est confirmée automatiquemen
 Objectif : les vendeurs recommandent Nyosi spontanément à d'autres vendeurs.
 
 - [ ] QR Code téléchargeable pour flyers et affiches en boutique
-- [ ] Aperçu riche quand le lien est partagé sur WhatsApp (image + titre + description)
+- [ ] Aperçu riche quand le lien est partagé sur WhatsApp et Facebook (image + titre + description — ce qu'on appelle "Open Graph")
 - [ ] Statistiques simples pour le vendeur : commandes du jour / semaine / mois
 - [ ] Statut de commande pour le client (en préparation / en livraison / livré)
 - [ ] Page "Commander à nouveau" pour les clients réguliers

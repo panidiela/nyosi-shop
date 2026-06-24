@@ -2,25 +2,25 @@
 
 ## Marché cible immédiat (Démarrage)
 - Yaoundé et Douala, Cameroun
-- Estimation : 50 000–200 000 vendeurs actifs sur WhatsApp
+- Estimation : 50 000–200 000 vendeurs actifs sur WhatsApp et Facebook
 - Cible réaliste année 1 : 200–500 vendeurs payants
 
 ## Marché à terme
 - Afrique francophone subsaharienne
 - Cameroun, Côte d'Ivoire, Sénégal, RDC, Burkina Faso
-- Estimation TAM : 5–10 millions de vendeurs WhatsApp
+- Estimation TAM : 5–10 millions de vendeurs WhatsApp et Facebook
 
 ## Comportements clés observés à Yaoundé
 
 ### Les vendeurs
-- Postent leurs produits sur WhatsApp Status tous les matins entre 7h et 9h
-- Reçoivent des commandes par message toute la journée
+- Postent leurs produits sur WhatsApp Status et Facebook (posts, stories, groupes, marketplace) tous les matins entre 7h et 9h
+- Reçoivent des commandes par message WhatsApp et commentaires Facebook toute la journée
 - Utilisent MTN MoMo et Orange Money pour recevoir les paiements
 - N'ont pas de site web (trop cher, trop complexe, pas de ROI visible)
 - Téléphones Android : Samsung Galaxy A, Tecno Spark, Itel — écrans 6–6.7 pouces
 
 ### Les acheteurs
-- Commandent sur WhatsApp ou Facebook directement
+- Commandent sur WhatsApp (message direct) ou Facebook (commentaires, DM) directement
 - Paient en Mobile Money ou à la livraison (préférence MoMo pour la confiance)
 - Veulent une confirmation rapide — sans réponse dans l'heure, ils vont ailleurs
 - Font confiance aux vendeurs qu'ils connaissent déjà

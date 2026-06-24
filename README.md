@@ -1,12 +1,12 @@
-# 🐝 NYOSI — La boutique WhatsApp des commerçants africains
+# 🐝 NYOSI — La boutique WhatsApp + Facebook des commerçants africains
 
-> "Transforme tes messages WhatsApp en commandes automatiques."
+> "Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message."
 
 ---
 
 ## C'est quoi Nyosi ?
 
-Nyosi est une boutique en ligne instantanée pour les commerçants africains francophones.
+Nyosi est une boutique en ligne instantanée pour les commerçants africains francophones qui vendent sur WhatsApp et Facebook.
 
 En 2 minutes, un vendeur crée sa boutique, obtient un lien, le partage sur WhatsApp et Facebook. Ses clients commandent et paient en Mobile Money directement. Plus de messages en boucle. Plus de commandes oubliées. Plus de paiements flous.
 

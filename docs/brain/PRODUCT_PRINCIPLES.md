@@ -4,13 +4,13 @@
 Créer sa boutique doit prendre 2 minutes. Pas de tutoriel. Pas de formation. Pas de configuration complexe. Si c'est plus long — c'est trop long.
 
 ## 2. Le lien est le produit
-Tout tourne autour du lien. C'est ce que le vendeur partage. C'est ce que le client clique. C'est la magie de Nyosi. Le lien doit être court, mémorable, partageable en 1 tap.
+Tout tourne autour du lien. C'est ce que le vendeur partage sur WhatsApp et Facebook. C'est ce que le client clique. C'est la magie de Nyosi. Le lien doit être court, mémorable, partageable en 1 tap — dans une story Facebook, un message WhatsApp, un post, une bio.
 
 ## 3. Mobile first Android
 100% des vendeurs cibles sont sur Android. L'expérience doit être parfaite sur un écran de 6 pouces. Pas d'app à télécharger — tout fonctionne dans le navigateur Chrome Android.
 
 ## 4. Zéro message à gérer
-Le but est que le vendeur n'ait plus à répondre à des messages pour prendre une commande. Si Nyosi génère plus de messages — on a échoué.
+Le but est que le vendeur n'ait plus à répondre à des messages WhatsApp ou Facebook pour prendre une commande. Si Nyosi génère plus de messages — on a échoué.
 
 ## 5. Paiement Mobile Money natif
 MTN MoMo et Orange Money. Pas de carte bancaire. Pas de PayPal. Pas de virement. Le paiement doit fonctionner comme les Camerounais paient déjà.

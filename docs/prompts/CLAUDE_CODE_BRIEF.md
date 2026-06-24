@@ -20,9 +20,9 @@ AVANT DE FAIRE QUOI QUE CE SOIT, lis ces fichiers :
 
 CONTEXTE PROJET :
 Nyosi est une boutique en ligne instantanée pour commerçants africains francophones.
-Un vendeur crée sa boutique en 2 minutes, obtient un lien, le partage sur WhatsApp.
+Un vendeur crée sa boutique en 2 minutes, obtient un lien, le partage sur WhatsApp et Facebook.
 Les clients commandent et paient en Mobile Money (MTN MoMo / Orange Money) depuis leur téléphone Android.
-Le vendeur reçoit une notification. Aucun message WhatsApp à gérer.
+Le vendeur reçoit une notification. Aucun message WhatsApp ou commentaire Facebook à gérer.
 
 STACK TECHNIQUE DÉCIDÉE :
 - Next.js App Router + TypeScript + Tailwind CSS
