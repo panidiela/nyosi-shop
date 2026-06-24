@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --nyosi-yellow: #FCB001;
+  --nyosi-black: #000000;
+  --nyosi-white: #FFFFFF;
+}

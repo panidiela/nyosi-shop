@@ -9,8 +9,9 @@ const config: Config = {
     extend: {
       colors: {
         nyosi: {
-          orange: "#F97316",
-          brown: "#7C3AED",
+          yellow: "#FCB001",
+          black: "#000000",
+          white: "#FFFFFF",
         },
       },
     },

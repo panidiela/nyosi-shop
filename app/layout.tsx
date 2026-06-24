@@ -3,7 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nyosi — Boutique en ligne",
-  description: "Commandez facilement depuis votre téléphone",
+  description:
+    "Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message.",
+  icons: {
+    icon: "/logo-icon.png",
+    apple: "/logo-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="bg-gray-50 text-gray-900 antialiased">{children}</body>
+      <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>
   );
 }
