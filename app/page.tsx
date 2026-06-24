@@ -25,10 +25,17 @@ export default function Accueil() {
       </p>
 
       <Link
-        href="/marie-gateaux"
-        className="bg-black text-[#FCB001] font-bold px-6 py-4 rounded-2xl text-base shadow-md active:opacity-80"
+        href="/creer-boutique"
+        className="bg-black text-[#FCB001] font-bold px-6 py-4 rounded-2xl text-base shadow-md active:opacity-80 w-full max-w-xs text-center"
       >
-        Voir la boutique de Marie 🍰
+        Créer ma boutique <Image src="/logo-icon.png" alt="" width={20} height={20} className="inline ml-1 align-middle" />
+      </Link>
+
+      <Link
+        href="/marie-gateaux"
+        className="mt-4 text-black/60 text-sm underline underline-offset-2"
+      >
+        Voir un exemple de boutique →
       </Link>
     </div>
   );
