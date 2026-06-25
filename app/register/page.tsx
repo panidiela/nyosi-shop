@@ -77,7 +77,7 @@ export default function RegisterPage() {
 
       {/* Header */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-center sticky top-0 z-10">
-        <Image src="/logo.png" alt="Nyosi" width={90} height={35} priority className="brightness-0 invert" />
+        <Image src="/logo-blanc.png" alt="Nyosi" width={90} height={35} priority className="h-8 w-auto object-contain" />
       </div>
 
       {/* Hero */}

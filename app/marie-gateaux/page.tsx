@@ -58,7 +58,7 @@ export default function BoutiqueMarie() {
             </svg>
           </div>
 
-          <Image src="/logo.png" alt="Nyosi" width={80} height={31} priority className="mx-auto mb-3" />
+          <Image src="/logo-vert.png" alt="Nyosi" width={80} height={31} priority className="mx-auto mb-3 h-7 w-auto object-contain" />
           <h2 className="text-xl font-bold text-[#1A1A1A] mb-1">Commande enregistrée !</h2>
           <p className="text-[#667781] text-sm mb-5">
             Merci <strong className="text-[#1A1A1A]">{commande.prenom}</strong> !{" "}
@@ -95,7 +95,7 @@ export default function BoutiqueMarie() {
 
       {/* Header vert */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <a href="/"><Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" /></a>
+        <a href="/"><Image src="/logo-blanc.png" alt="Nyosi" width={80} height={30} priority className="h-7 w-auto object-contain" /></a>
         <span className="text-white/50 text-xs font-medium">nyosi.cm</span>
       </div>
 
@@ -112,7 +112,7 @@ export default function BoutiqueMarie() {
       <div className="px-4 -mt-5">
         <div className="bg-white rounded-2xl shadow-sm p-4 mb-4 card-fade-in">
           <p className="text-[#1A1A1A] font-semibold text-base mb-1">
-            Bonjour 👋 Commandez directement sans m&apos;écrire.
+            Bonjour 👋 Commandez directement.
           </p>
           <p className="text-[#667781] text-sm">Livraison disponible à Yaoundé.</p>
         </div>
@@ -129,7 +129,7 @@ export default function BoutiqueMarie() {
           </div>
           <div className="bg-white rounded-xl p-3 text-center shadow-sm">
             <p className="text-lg mb-0.5">🚚</p>
-            <p className="text-[#1A1A1A] text-xs font-bold">À la livraison</p>
+            <p className="text-[#1A1A1A] text-xs font-bold">Paiement à la livraison</p>
           </div>
         </div>
 
@@ -180,7 +180,7 @@ export default function BoutiqueMarie() {
 
         {/* Footer */}
         <footer className="text-center py-4">
-          <Image src="/logo.png" alt="Nyosi" width={56} height={22} className="mx-auto mb-1" />
+          <Image src="/logo-vert.png" alt="Nyosi" width={56} height={22} className="mx-auto mb-1 h-5 w-auto object-contain" />
           <p className="text-[#667781] text-xs">Boutique créée avec Nyosi · nyosi.cm</p>
         </footer>
       </div>

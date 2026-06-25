@@ -6,8 +6,15 @@ export const metadata: Metadata = {
   description:
     "Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message.",
   icons: {
-    icon: "/logo-icon.png",
-    apple: "/logo-icon.png",
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/apple-touch-icon.png",
+    other: [
+      { rel: "icon", url: "/android-chrome-192x192.png", sizes: "192x192" },
+    ],
   },
 };
 

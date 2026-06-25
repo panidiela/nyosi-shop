@@ -11,12 +11,12 @@ export default function Accueil() {
         {/* Logo */}
         <div className="mb-8">
           <Image
-            src="/logo.png"
+            src="/logo-blanc.png"
             alt="Nyosi"
             width={160}
             height={62}
             priority
-            className="mx-auto brightness-0 invert"
+            className="mx-auto h-14 w-auto object-contain"
           />
         </div>
 
@@ -30,7 +30,7 @@ export default function Accueil() {
           Ta boutique en ligne en 2 minutes
         </h1>
         <p className="text-white/70 text-base mb-10 max-w-xs leading-relaxed">
-          Tes clients commandent directement. Sans messages, sans confusion.
+          Partage ton lien, reçois tes commandes clairement.
         </p>
 
         {/* Bouton principal */}

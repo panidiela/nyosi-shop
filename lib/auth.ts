@@ -43,7 +43,12 @@ function traduireErreur(msg: string): string {
     return "Trop de tentatives. Attends quelques minutes.";
   if (msg.includes("Email rate limit exceeded"))
     return "Trop de tentatives. Attends quelques minutes.";
-  return "Une erreur s'est produite. Réessaie.";
+  if (msg.includes("Signups not allowed"))
+    return "Les inscriptions sont désactivées dans Supabase. Active-les dans Authentication → Providers → Email.";
+  if (msg.includes("signup is disabled"))
+    return "Les inscriptions sont désactivées dans Supabase. Active-les dans Authentication → Providers → Email.";
+  /* En dernier recours : afficher le message brut pour aider au diagnostic */
+  return `Erreur Supabase : ${msg}`;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -64,7 +69,7 @@ export async function inscrire(
 
   const authEmail = email.trim() ? email.trim() : emailSynthetique(telephone);
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: authEmail,
     password: motDePasse,
     options: {
@@ -73,6 +78,22 @@ export async function inscrire(
   });
 
   if (error) return { erreur: traduireErreur(error.message) };
+
+  /*
+   * Supabase a créé le compte MAIS la confirmation d'email est activée.
+   * data.session est null → l'utilisateur ne peut pas se connecter.
+   * Solution : désactiver "Confirm email" dans Supabase
+   * Authentication → Providers → Email → toggle OFF
+   */
+  if (data.user && !data.session) {
+    return {
+      erreur:
+        "Compte créé, mais la confirmation d'email est activée dans Supabase. " +
+        "Va dans Authentication → Providers → Email et désactive « Confirm email ». " +
+        `(Email utilisé : ${authEmail})`,
+    };
+  }
+
   return { erreur: null };
 }
 

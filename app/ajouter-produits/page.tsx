@@ -184,7 +184,7 @@ export default function AjouterProduits() {
           </div>
 
           <div className="flex justify-center mb-3">
-            <Image src="/logo.png" alt="Nyosi" width={80} height={31} priority />
+            <Image src="/logo-vert.png" alt="Nyosi" width={80} height={31} priority className="h-7 w-auto object-contain" />
           </div>
           <h2 className="text-xl font-bold text-[#1A1A1A] mb-1">Boutique créée !</h2>
           <p className="text-[#667781] text-sm mb-5">{draft?.nom} · {draft?.ville}</p>
@@ -238,7 +238,7 @@ export default function AjouterProduits() {
     <div className="min-h-screen bg-[#F0F2F5]">
 
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" />
+        <Image src="/logo-blanc.png" alt="Nyosi" width={80} height={30} priority className="h-7 w-auto object-contain" />
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             <span className="w-6 h-1.5 rounded-full bg-white/30"></span>

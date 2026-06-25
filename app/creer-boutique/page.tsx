@@ -50,7 +50,7 @@ export default function CreerBoutique() {
 
       {/* Barre header */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" />
+        <Image src="/logo-blanc.png" alt="Nyosi" width={80} height={30} priority className="h-7 w-auto object-contain" />
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             <span className="w-6 h-1.5 rounded-full bg-white"></span>

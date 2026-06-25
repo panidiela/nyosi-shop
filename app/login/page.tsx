@@ -56,14 +56,14 @@ export default function LoginPage() {
 
       {/* Header */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-center sticky top-0 z-10">
-        <Image src="/logo.png" alt="Nyosi" width={90} height={35} priority className="brightness-0 invert" />
+        <Image src="/logo-blanc.png" alt="Nyosi" width={90} height={35} priority className="h-8 w-auto object-contain" />
       </div>
 
       {/* Hero */}
       <div className="bg-[#075E54] px-4 pt-5 pb-10 text-center">
         <p className="text-[#25D366] text-sm font-semibold mb-1">Bienvenue 👋</p>
         <h1 className="text-white text-2xl font-bold mb-1">Connexion</h1>
-        <p className="text-white/60 text-sm">Accède à ton bureau commerçant.</p>
+        <p className="text-white/60 text-sm">Accède à ta boutique.</p>
       </div>
 
       <main className="px-4 -mt-5 pb-8">
@@ -139,25 +139,12 @@ export default function LoginPage() {
               <p className="text-[#667781] text-sm">
                 Pas encore de compte ?{" "}
                 <Link href="/register" className="text-[#075E54] font-semibold underline">
-                  Créer un compte
+                  Créer un compte gratuitement
                 </Link>
               </p>
             </div>
 
           </form>
-        </div>
-
-        {/* Accès boutique sans compte */}
-        <div className="mt-5 bg-white rounded-2xl shadow-sm p-4">
-          <p className="text-[#667781] text-xs text-center mb-3">
-            Tu n&apos;as pas encore de compte Nyosi ?
-          </p>
-          <a
-            href="/creer-boutique"
-            className="block w-full border border-[#25D366] text-[#075E54] font-bold py-3 rounded-xl text-sm text-center active:bg-[#25D366]/10"
-          >
-            Créer ma boutique gratuitement →
-          </a>
         </div>
       </main>
     </div>

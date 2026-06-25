@@ -156,7 +156,7 @@ export default function PageBoutique() {
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </div>
-        <Image src="/logo.png" alt="Nyosi" width={80} height={31} priority className="mx-auto mb-4" />
+        <Image src="/logo-vert.png" alt="Nyosi" width={80} height={31} priority className="mx-auto mb-4 h-7 w-auto object-contain" />
         <h1 className="text-lg font-bold text-[#1A1A1A] mb-2">Boutique introuvable</h1>
         <p className="text-[#667781] text-sm mb-6">
           Cette boutique n&apos;existe pas encore ou n&apos;est pas disponible sur cet appareil.
@@ -235,7 +235,7 @@ export default function PageBoutique() {
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
         </button>
-        <Image src="/logo.png" alt="Nyosi" width={70} height={26} priority className="brightness-0 invert" />
+        <Image src="/logo-blanc.png" alt="Nyosi" width={70} height={26} priority className="h-7 w-auto object-contain" />
         <span className="text-white font-semibold text-sm">Ma commande</span>
       </div>
 
@@ -412,11 +412,11 @@ export default function PageBoutique() {
 
   /* ── BOUTIQUE ── */
   return (
-    <div className="min-h-screen bg-[#F0F2F5] pb-32">
+    <div className="min-h-screen bg-[#F0F2F5] pb-28">
 
       {/* Header vert */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <a href="/"><Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" /></a>
+        <a href="/"><Image src="/logo-blanc.png" alt="Nyosi" width={80} height={30} priority className="h-7 w-auto object-contain" /></a>
         <span className="text-white/50 text-xs font-medium">nyosi.cm</span>
       </div>
 
@@ -436,7 +436,7 @@ export default function PageBoutique() {
       <div className="px-4 -mt-5">
         <div className="bg-white rounded-2xl shadow-sm p-4 mb-4 card-fade-in">
           <p className="text-[#1A1A1A] font-semibold text-base mb-1">
-            Bonjour 👋 Commandez directement sans m&apos;écrire.
+            Bonjour 👋 Commandez directement.
           </p>
           <p className="text-[#667781] text-sm">Livraison disponible.</p>
         </div>
@@ -453,7 +453,7 @@ export default function PageBoutique() {
           </div>
           <div className="bg-white rounded-xl p-3 text-center shadow-sm">
             <p className="text-lg mb-0.5">🚚</p>
-            <p className="text-[#1A1A1A] text-xs font-bold">À la livraison</p>
+            <p className="text-[#1A1A1A] text-xs font-bold">Paiement à la livraison</p>
           </div>
         </div>
 
@@ -465,60 +465,57 @@ export default function PageBoutique() {
           </div>
         )}
 
-        {/* Produits */}
+        {/* Produits — grille 2 colonnes */}
         {produits.length > 0 && (
           <section className="mb-4">
             <h2 className="text-xs font-bold text-[#667781] uppercase tracking-widest mb-3">
               Nos produits
             </h2>
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {produits.map((produit, i) => {
                 const q = qte(produit);
                 return (
-                  <div key={i} className="bg-white rounded-2xl shadow-sm overflow-hidden card-fade-in" style={{ animationDelay: `${i * 0.08}s` }}>
+                  <div key={i} className="bg-white rounded-2xl shadow-sm overflow-hidden card-fade-in flex flex-col" style={{ animationDelay: `${i * 0.08}s` }}>
 
                     {produit.photo ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={produit.photo}
                         alt={produit.nom}
-                        className="w-full aspect-[4/3] object-cover"
+                        className="w-full aspect-square object-cover"
                       />
                     ) : (
-                      <div className="w-full aspect-[4/3] bg-[#F0F2F5] flex flex-col items-center justify-center gap-1 text-[#E8E8E4]">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <div className="w-full aspect-square bg-[#F0F2F5] flex items-center justify-center text-[#E8E8E4]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
                           <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                           <circle cx="12" cy="13" r="4"/>
                         </svg>
                       </div>
                     )}
 
-                    <div className="p-4">
-                      <p className="font-bold text-[#1A1A1A] text-base leading-tight">{produit.nom}</p>
-                      {produit.description && (
-                        <p className="text-[#667781] text-sm mt-0.5">{produit.description}</p>
-                      )}
-                      <p className="text-[#25D366] font-bold text-lg mt-1 mb-3">{formatPrix(produit.prix)}</p>
+                    <div className="p-3 flex flex-col flex-1">
+                      <p className="font-bold text-[#1A1A1A] text-sm leading-tight line-clamp-2">{produit.nom}</p>
+                      <p className="text-[#25D366] font-bold text-base mt-1 mb-2">{formatPrix(produit.prix)}</p>
 
                       {q === 0 ? (
                         <button
                           onClick={() => changerQuantite(produit, 1)}
-                          className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-3 rounded-xl text-sm transition-colors"
+                          className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-2.5 rounded-xl text-sm mt-auto"
                         >
-                          Ajouter au panier
+                          + Ajouter
                         </button>
                       ) : (
-                        <div className="flex items-center justify-between bg-[#F0F2F5] rounded-xl px-3 py-2">
+                        <div className="flex items-center justify-between bg-[#F0F2F5] rounded-xl px-2 py-1.5 mt-auto">
                           <button
                             onClick={() => changerQuantite(produit, -1)}
-                            className="w-10 h-10 bg-[#075E54] text-white font-bold rounded-xl text-xl flex items-center justify-center"
+                            className="w-8 h-8 bg-[#075E54] text-white font-bold rounded-lg text-lg flex items-center justify-center"
                           >
                             −
                           </button>
-                          <span className="font-bold text-[#1A1A1A] text-lg">{q}</span>
+                          <span className="font-bold text-[#1A1A1A] text-base">{q}</span>
                           <button
                             onClick={() => changerQuantite(produit, 1)}
-                            className="w-10 h-10 bg-[#25D366] text-white font-bold rounded-xl text-xl flex items-center justify-center"
+                            className="w-8 h-8 bg-[#25D366] text-white font-bold rounded-lg text-lg flex items-center justify-center"
                           >
                             +
                           </button>
@@ -532,7 +529,7 @@ export default function PageBoutique() {
           </section>
         )}
 
-        {/* Contact & Partager */}
+        {/* Partager */}
         <section className="flex flex-col gap-3 mb-4">
           <button
             onClick={partagerBoutique}
@@ -544,31 +541,18 @@ export default function PageBoutique() {
             </svg>
             {partageEtat === "copie" ? "Lien copié !" : "Partager cette boutique"}
           </button>
-
-          <div className="bg-white rounded-2xl p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.832L.524 22.5l4.8-.96C6.949 22.487 9.425 23 12 23c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21c-2.394 0-4.617-.734-6.458-1.985l-.463-.277-2.842.567.594-2.768-.3-.482C1.65 14.596 1 13.367 1 12 1 5.924 5.924 1 12 1s11 4.924 11 11-4.924 11-11 11z"/>
-              </svg>
-            </div>
-            <div>
-              <p className="text-[#1A1A1A] font-bold">{boutique.whatsapp}</p>
-              <p className="text-[#667781] text-xs">WhatsApp</p>
-            </div>
-          </div>
         </section>
 
         {/* Footer */}
         <footer className="text-center py-4">
-          <Image src="/logo.png" alt="Nyosi" width={56} height={22} className="mx-auto mb-1" />
+          <Image src="/logo-vert.png" alt="Nyosi" width={56} height={22} className="mx-auto mb-1 h-5 w-auto object-contain" />
           <p className="text-[#667781] text-xs">Boutique créée avec Nyosi · nyosi.cm</p>
         </footer>
       </div>
 
-      {/* Barre panier flottante */}
-      {nbArticles > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 px-4 pb-6 pt-3 bg-white border-t border-[#E8E8E4] shadow-xl">
+      {/* Barre fixe en bas : WhatsApp quand panier vide, Commander quand panier plein */}
+      <div className="fixed bottom-0 left-0 right-0 px-4 pb-6 pt-3 bg-white border-t border-[#E8E8E4] shadow-xl">
+        {nbArticles > 0 ? (
           <button
             onClick={() => { setEcran("commande"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-4 rounded-2xl text-base flex items-center justify-between px-5"
@@ -578,8 +562,21 @@ export default function PageBoutique() {
               {nbArticles} article{nbArticles > 1 ? "s" : ""} · {formatPrix(totalPanier)}
             </span>
           </button>
-        </div>
-      )}
+        ) : (
+          <a
+            href={`https://wa.me/${boutique.whatsapp.replace(/[\s\-+()\./]/g, "")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-3"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.524 5.832L.524 22.5l4.8-.96C6.949 22.487 9.425 23 12 23c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21c-2.394 0-4.617-.734-6.458-1.985l-.463-.277-2.842.567.594-2.768-.3-.482C1.65 14.596 1 13.367 1 12 1 5.924 5.924 1 12 1s11 4.924 11 11-4.924 11-11 11z"/>
+            </svg>
+            Contacter le vendeur
+          </a>
+        )}
+      </div>
     </div>
   );
 }
