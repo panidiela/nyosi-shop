@@ -51,21 +51,35 @@ export type ResultatSauvegarde = {
   ok: boolean;
   source: "supabase" | "local";
   erreur?: string;
+  diagnostic?: {
+    supabaseUrl: boolean;
+    supabaseKey: boolean;
+    erreurBoutique?: string;
+    erreurProduits?: string;
+    erreurDelete?: string;
+    erreurException?: string;
+  };
 };
 
 export async function sauvegarderBoutique(boutique: Boutique): Promise<ResultatSauvegarde> {
   // localStorage — toujours (backup instantané)
   localStorage.setItem(`nyosi_boutique_${boutique.slug}`, JSON.stringify(boutique));
 
+  const urlDetectee = !!(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  const keyDetectee = !!(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
   if (!supabase) {
-    // Supabase non configuré → localStorage seulement
-    return { ok: true, source: "local" };
+    return {
+      ok: false,
+      source: "local",
+      erreur: "Client Supabase non initialisé",
+      diagnostic: { supabaseUrl: urlDetectee, supabaseKey: keyDetectee },
+    };
   }
 
   try {
     const user = await getUtilisateur();
 
-    // Upsert la boutique (crée ou met à jour si le slug existe déjà)
     const { error: errBoutique } = await supabase
       .from("boutiques")
       .upsert(
@@ -85,10 +99,18 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<ResultatS
 
     if (errBoutique) {
       console.error("[Nyosi] Supabase boutique error:", errBoutique);
-      return { ok: false, source: "local", erreur: errBoutique.message };
+      return {
+        ok: false,
+        source: "local",
+        erreur: errBoutique.message,
+        diagnostic: {
+          supabaseUrl: urlDetectee,
+          supabaseKey: keyDetectee,
+          erreurBoutique: `[${errBoutique.code}] ${errBoutique.message} — ${errBoutique.details ?? ""} — hint: ${errBoutique.hint ?? ""}`,
+        },
+      };
     }
 
-    // Supprimer les anciens produits et réinsérer
     const { error: errDelete } = await supabase
       .from("produits")
       .delete()
@@ -96,7 +118,16 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<ResultatS
 
     if (errDelete) {
       console.error("[Nyosi] Supabase delete produits error:", errDelete);
-      return { ok: false, source: "local", erreur: errDelete.message };
+      return {
+        ok: false,
+        source: "local",
+        erreur: errDelete.message,
+        diagnostic: {
+          supabaseUrl: urlDetectee,
+          supabaseKey: keyDetectee,
+          erreurDelete: `[${errDelete.code}] ${errDelete.message}`,
+        },
+      };
     }
 
     if (boutique.produits.length > 0) {
@@ -112,15 +143,37 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<ResultatS
       );
       if (errProduits) {
         console.error("[Nyosi] Supabase insert produits error:", errProduits);
-        return { ok: false, source: "local", erreur: errProduits.message };
+        return {
+          ok: false,
+          source: "local",
+          erreur: errProduits.message,
+          diagnostic: {
+            supabaseUrl: urlDetectee,
+            supabaseKey: keyDetectee,
+            erreurProduits: `[${errProduits.code}] ${errProduits.message} — ${errProduits.details ?? ""}`,
+          },
+        };
       }
     }
 
-    return { ok: true, source: "supabase" };
+    return {
+      ok: true,
+      source: "supabase",
+      diagnostic: { supabaseUrl: urlDetectee, supabaseKey: keyDetectee },
+    };
   } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
+    const msg = e instanceof Error ? e.message : JSON.stringify(e);
     console.error("[Nyosi] Supabase indisponible, localStorage utilisé.", e);
-    return { ok: false, source: "local", erreur: msg };
+    return {
+      ok: false,
+      source: "local",
+      erreur: msg,
+      diagnostic: {
+        supabaseUrl: urlDetectee,
+        supabaseKey: keyDetectee,
+        erreurException: msg,
+      },
+    };
   }
 }
 

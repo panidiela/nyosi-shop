@@ -204,11 +204,48 @@ export default function AjouterProduits() {
               <span className="text-[#1B5E20] text-sm font-semibold">✓ Boutique sauvegardée en ligne</span>
             </div>
           ) : (
-            <div className="bg-[#FFF8E1] border border-[#FFE082] rounded-xl px-4 py-2 mb-4">
-              <p className="text-[#7B4F00] text-sm font-semibold">⚠️ Boutique sauvegardée uniquement sur cet appareil</p>
-              {resultatSauvegarde?.erreur && (
-                <p className="text-[#7B4F00] text-xs mt-1 break-all">{resultatSauvegarde.erreur}</p>
-              )}
+            <div className="bg-[#FFF8E1] border border-[#FFE082] rounded-xl px-4 py-3 mb-4 text-left">
+              <p className="text-[#7B4F00] text-sm font-bold mb-2">⚠️ Boutique sauvegardée uniquement sur cet appareil</p>
+              <div className="flex flex-col gap-1 text-xs text-[#7B4F00]">
+                <p>
+                  <span className="font-semibold">Supabase URL :</span>{" "}
+                  {resultatSauvegarde?.diagnostic?.supabaseUrl ? "✓ détectée" : "✗ MANQUANTE"}
+                </p>
+                <p>
+                  <span className="font-semibold">Supabase Key :</span>{" "}
+                  {resultatSauvegarde?.diagnostic?.supabaseKey ? "✓ détectée" : "✗ MANQUANTE"}
+                </p>
+                {resultatSauvegarde?.erreur && (
+                  <p className="mt-1">
+                    <span className="font-semibold">Erreur :</span>{" "}
+                    <span className="break-all">{resultatSauvegarde.erreur}</span>
+                  </p>
+                )}
+                {resultatSauvegarde?.diagnostic?.erreurBoutique && (
+                  <p className="mt-1">
+                    <span className="font-semibold">Détail boutique :</span>{" "}
+                    <span className="break-all">{resultatSauvegarde.diagnostic.erreurBoutique}</span>
+                  </p>
+                )}
+                {resultatSauvegarde?.diagnostic?.erreurProduits && (
+                  <p className="mt-1">
+                    <span className="font-semibold">Détail produits :</span>{" "}
+                    <span className="break-all">{resultatSauvegarde.diagnostic.erreurProduits}</span>
+                  </p>
+                )}
+                {resultatSauvegarde?.diagnostic?.erreurDelete && (
+                  <p className="mt-1">
+                    <span className="font-semibold">Détail suppression :</span>{" "}
+                    <span className="break-all">{resultatSauvegarde.diagnostic.erreurDelete}</span>
+                  </p>
+                )}
+                {resultatSauvegarde?.diagnostic?.erreurException && (
+                  <p className="mt-1">
+                    <span className="font-semibold">Exception :</span>{" "}
+                    <span className="break-all">{resultatSauvegarde.diagnostic.erreurException}</span>
+                  </p>
+                )}
+              </div>
             </div>
           )}
 
