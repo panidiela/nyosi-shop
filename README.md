@@ -8,7 +8,7 @@
 
 Nyosi est une boutique en ligne instantanée pour les commerçants africains francophones qui vendent sur WhatsApp et Facebook.
 
-En 2 minutes, un vendeur crée sa boutique, obtient un lien, le partage sur WhatsApp et Facebook. Ses clients commandent et paient en Mobile Money directement. Plus de messages en boucle. Plus de commandes oubliées. Plus de paiements flous.
+En 2 minutes, un vendeur crée sa boutique, obtient un lien, le partage sur WhatsApp et Facebook. Ses clients commandent et paient par paiement mobile directement. Plus de messages en boucle. Plus de commandes oubliées. Plus de paiements flous.
 
 ---
 
@@ -94,7 +94,7 @@ Après le push → Vercel redéploie automatiquement. Rien d'autre à faire.
 ## Lien avec Nyosi Caisse
 
 Nyosi est une marque avec deux produits :
-- **Nyosi** (ce projet) → boutique en ligne, commandes, paiement Mobile Money
+- **Nyosi** (ce projet) → boutique en ligne, commandes, paiement mobile
 - **Nyosi Caisse** → gestion stock et caisse pour snacks/bars/restaurants (déjà en test au café de Pani)
 
 À terme : une commande Nyosi entre automatiquement dans Nyosi Caisse. Le stock se met à jour tout seul.

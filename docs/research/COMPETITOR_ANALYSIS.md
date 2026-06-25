@@ -4,7 +4,7 @@
 Aucun outil ne combine aujourd'hui pour les vendeurs camerounais :
 ✓ Création de boutique en 2 minutes
 ✓ Lien partageable directement sur WhatsApp et Facebook
-✓ Paiement Mobile Money natif (MTN MoMo / Orange Money)
+✓ Paiement mobile natif (compatible MTN MoMo, Orange Money et autres)
 ✓ Interface 100% en français
 ✓ Mobile first Android
 ✓ Prix accessible en FCFA
@@ -29,7 +29,7 @@ C'est exactement le gap que Nyosi comble.
 
 | Outil | Forces | Faiblesses |
 |---|---|---|
-| CinetPay | Mobile Money Afrique francophone | Pas de boutique intégrée |
+| CinetPay | Paiement mobile Afrique francophone | Pas de boutique intégrée |
 | Paydunia | Multi-pays | Pas de boutique intégrée |
 | Wave | Simple, populaire | Pas de boutique, seulement transfert |
 

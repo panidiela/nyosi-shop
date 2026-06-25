@@ -19,4 +19,4 @@ Supabase c'est comme un grand classeur numérique où Nyosi range toutes les inf
 - vendors → les comptes vendeurs
 - products → les produits de chaque boutique
 - orders → les commandes reçues
-- payments → les paiements Mobile Money
+- payments → les paiements mobiles

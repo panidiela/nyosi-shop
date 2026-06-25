@@ -67,7 +67,7 @@ Nyosi est une boutique en ligne instantanée pour commerçants africains francop
 1. Validation terrain — faire tester par de vrais commerçants
 2. Retours terrain → itérations rapides sur l'UX
 3. Préparer la migration localStorage → Supabase
-4. Intégration CinetPay (paiement Mobile Money)
+4. Intégration CinetPay (paiement mobile)
 
 ---
 

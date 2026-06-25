@@ -35,14 +35,14 @@ Objectif : un vendeur peut créer sa boutique seul en 2 minutes.
 - [ ] Déploiement Vercel + domaine nyosi.cm
 - [ ] Critère de passage : 5 vendeurs créent leur boutique seuls sans aide
 
-## Phase 2 — Paiement Mobile Money (Mois 2)
+## Phase 2 — Paiement mobile (Mois 2)
 Objectif : le client paie directement, la commande est confirmée automatiquement.
 
-- [ ] Intégration CinetPay (MTN MoMo + Orange Money Cameroun)
+- [ ] Intégration CinetPay (compatible MTN MoMo, Orange Money et autres opérateurs)
 - [ ] Confirmation automatique de commande par message WhatsApp
 - [ ] Notification vendeur à chaque commande payée
 - [ ] Historique des paiements dans le tableau de bord vendeur
-- [ ] Critère de passage : 10 paiements réussis via Mobile Money
+- [ ] Critère de passage : 10 paiements réussis via paiement mobile
 
 ## Phase 3 — Croissance (Mois 3–4)
 Objectif : les vendeurs recommandent Nyosi spontanément à d'autres vendeurs.
@@ -59,7 +59,7 @@ Objectif : passer de gratuit à payant sans perdre les utilisateurs.
 - [ ] Freemium : 10 commandes/mois gratuites
 - [ ] Plan Standard : 5 000 FCFA/mois — commandes illimitées
 - [ ] Plan Pro : 10 000 FCFA/mois — analytics + support prioritaire
-- [ ] Paiement abonnement via Mobile Money (CinetPay)
+- [ ] Paiement abonnement via paiement mobile (CinetPay)
 
 ## Phase 5 — Connexion Nyosi Caisse (Mois 6+)
 Objectif : les deux produits Nyosi travaillent ensemble.

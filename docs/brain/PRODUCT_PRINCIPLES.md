@@ -12,8 +12,8 @@ Tout tourne autour du lien. C'est ce que le vendeur partage sur WhatsApp et Face
 ## 4. Zéro message à gérer
 Le but est que le vendeur n'ait plus à répondre à des messages WhatsApp ou Facebook pour prendre une commande. Si Nyosi génère plus de messages — on a échoué.
 
-## 5. Paiement Mobile Money natif
-MTN MoMo et Orange Money. Pas de carte bancaire. Pas de PayPal. Pas de virement. Le paiement doit fonctionner comme les Camerounais paient déjà.
+## 5. Paiement mobile natif
+Pas de carte bancaire. Pas de PayPal. Pas de virement. Le paiement doit fonctionner comme les Camerounais paient déjà — compatible avec MTN MoMo, Orange Money et autres opérateurs mobiles.
 
 ## 6. Simplicité radicale
 Un vendeur debout dans sa boutique, occupé, fatigué, doit comprendre Nyosi en 30 secondes. Chaque écran a une seule mission. Chaque action est évidente.

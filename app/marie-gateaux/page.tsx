@@ -259,7 +259,7 @@ export default function BoutiqueMarie() {
                     <input type="radio" name="paiement" defaultChecked className="accent-[#25D366] w-5 h-5" />
                     <span className="text-[#1A1A1A] font-medium">💵 Payer à la livraison</span>
                   </label>
-                  <p className="text-xs text-[#667781] mt-2 ml-8">Cash ou Mobile Money à la réception.</p>
+                  <p className="text-xs text-[#667781] mt-2 ml-8">Cash ou paiement mobile à la réception.</p>
                 </div>
 
                 {erreur && (

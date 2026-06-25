@@ -363,13 +363,29 @@ export default function PageBoutique() {
               </div>
             </div>
 
-            <div className="border border-[#25D366]/30 rounded-xl p-4 bg-[#25D366]/5">
-              <p className="text-sm font-bold text-[#1A1A1A] mb-2">Paiement</p>
-              <label className="flex items-center gap-3">
-                <input type="radio" defaultChecked className="accent-[#25D366] w-5 h-5" />
-                <span className="text-[#1A1A1A] font-medium">💵 Payer à la livraison</span>
+            <div>
+              <p className="text-sm font-bold text-[#1A1A1A] mb-3">Mode de paiement</p>
+
+              {/* Option 1 : Livraison — disponible */}
+              <label className="flex items-start gap-3 border border-[#25D366] rounded-xl p-4 bg-[#25D366]/5 mb-3 cursor-pointer">
+                <input type="radio" name="paiement" value="livraison" defaultChecked className="accent-[#25D366] w-5 h-5 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[#1A1A1A] font-semibold">💵 Payer à la livraison</p>
+                  <p className="text-xs text-[#667781] mt-0.5">Cash ou paiement mobile à la réception. Disponible maintenant.</p>
+                </div>
               </label>
-              <p className="text-xs text-[#667781] mt-2 ml-8">Cash ou Mobile Money à la réception.</p>
+
+              {/* Option 2 : Paiement mobile — bientôt */}
+              <div className="flex items-start gap-3 border border-[#E8E8E4] rounded-xl p-4 bg-[#F0F2F5] opacity-60">
+                <input type="radio" name="paiement" value="paiement_mobile" disabled className="w-5 h-5 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <p className="text-[#1A1A1A] font-semibold">📱 Paiement mobile</p>
+                    <span className="bg-[#FCB001] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">Bientôt</span>
+                  </div>
+                  <p className="text-xs text-[#667781] mt-0.5">Compatible plus tard avec MTN MoMo, Orange Money et autres.</p>
+                </div>
+              </div>
             </div>
 
             {erreurCommande && (

@@ -2,83 +2,111 @@
 
 ---
 
-## Situation MVP
+## Situation actuelle — MVP Phase 2
 
-**Paiement à la livraison uniquement.**
+Le formulaire de commande propose deux options visibles :
 
-Le client commande en ligne mais paie en cash ou Mobile Money au moment de la livraison.
+| Option | Statut | Comportement |
+|---|---|---|
+| 💵 Payer à la livraison | ✅ Disponible | Sélectionnable, commande validée normalement |
+| 📱 Paiement mobile | 🔒 Bientôt | Désactivé (`disabled`), badge "Bientôt", non cliquable |
 
-Ce mode de paiement est :
-- Familier et rassurant pour les Africains (confiance = je paie quand je reçois)
-- Zéro intégration technique en MVP
-- Compatible avec MTN MoMo et Orange Money (transfert manuel au livreur)
+**Payer à la livraison reste l'option principale.** Au Cameroun, la confiance client repose sur "je paie quand je reçois". Cette option ne sera jamais supprimée.
+
+Le paiement mobile est affiché pour :
+1. Montrer aux clients que ça arrive
+2. Créer une attente positive
+3. Ne rien promettre sans tenir
 
 ---
 
-## Phase 2 — Paiement Mobile Money en ligne
+## Fichier concerné
+
+`app/[slug]/page.tsx` — section `/* FORMULAIRE COMMANDE */` → bloc "Mode de paiement"
+
+Structure du bloc :
+
+```tsx
+{/* Option 1 : Livraison — disponible */}
+<label> <input type="radio" defaultChecked /> Payer à la livraison </label>
+
+{/* Option 2 : Paiement mobile — bientôt */}
+<div> <input type="radio" disabled /> Paiement mobile <span>Bientôt</span> </div>
+```
+
+---
+
+## Phase 2 — Paiement mobile avec CinetPay
 
 ### Solution retenue : CinetPay
 
-CinetPay est le prestataire de paiement Mobile Money sélectionné.
+CinetPay est le prestataire de paiement sélectionné pour l'Afrique francophone.
 
-**Supports** : MTN MoMo Cameroun, Orange Money Cameroun
-**Extension** : Côte d'Ivoire, Sénégal, et autres pays d'Afrique francophone
+**Supports** : MTN MoMo Cameroun, Orange Money Cameroun (exemples — d'autres opérateurs possibles)
+**Extension** : Côte d'Ivoire, Sénégal, et autres pays
 
-### Flux de paiement prévu (Phase 2)
+### Flux de paiement prévu
 
 ```
-Client clique "Payer maintenant"
+Client sélectionne "Paiement mobile"
        ↓
-Nyosi appelle l'API CinetPay (POST /api/paiement)
+Client confirme sa commande
        ↓
-CinetPay retourne une URL de paiement
+Nyosi crée la commande en base (statut: "en_attente_paiement")
        ↓
-Client redirigé vers la page de paiement CinetPay
+Nyosi appelle POST /api/paiement → CinetPay API
        ↓
-Client entre son code MTN MoMo ou Orange Money
+CinetPay retourne une URL de paiement sécurisée
        ↓
-CinetPay confirme le paiement via webhook
+Client redirigé vers la page CinetPay
        ↓
-Nyosi reçoit le webhook → commande validée
+Client règle avec son opérateur mobile (MTN MoMo, Orange Money, etc.)
        ↓
-Client redirigé vers la confirmation NY-XXXX
+CinetPay confirme via webhook POST /api/webhook/cinetpay
        ↓
-Commerçant reçoit une notification WhatsApp
+Nyosi met à jour statut commande → "confirmee"
+       ↓
+Client redirigé vers l'écran de confirmation NY-XXXX
+       ↓
+Commerçant voit la commande dans son dashboard
 ```
 
-### Frais
+### Frais CinetPay
 
-- ~2–3% par transaction (CinetPay)
-- À intégrer dans le pricing Nyosi ou répercuter sur le client (frais de service)
+- ~2–3% par transaction (à confirmer avec CinetPay)
+- Décision à prendre : frais absorbés par Nyosi ou répercutés sur le client
 
-### Prérequis pour la Phase 2
+### Statuts commande avec paiement
 
-1. Compte professionnel CinetPay créé et validé
-2. API Key et Site ID CinetPay configurés dans Vercel (variables d'environnement)
-3. Supabase en place pour enregistrer les paiements
-4. Webhook endpoint Next.js créé : `app/api/webhook/cinetpay/route.ts`
+| Statut | Signification |
+|---|---|
+| `en_attente` | Commande reçue, paiement à la livraison |
+| `en_attente_paiement` | Commande créée, en attente du paiement mobile |
+| `confirmee` | Paiement reçu (livraison) ou confirmé (paiement mobile) |
+| `livree` | Commande livrée |
+| `annulee` | Commande annulée (ou paiement échoué) |
 
 ---
 
-## Considérations futures
-
-### Orange Money direct
-
-Orange Money propose une API directe (sans intermédiaire comme CinetPay) pour les volumes importants. À considérer si Nyosi dépasse 1 000 transactions/mois.
-
-### MTN MoMo API
-
-MTN propose aussi une API directe. Même considération.
-
-### Paiement fractionné
-
-Non prévu dans la roadmap actuelle. À évaluer en fonction des demandes terrain.
-
----
-
-## Fichiers concernés
+## Phase 2 — Fichiers à créer
 
 | Fichier | Rôle |
 |---|---|
-| `app/[slug]/page.tsx` | Bouton paiement à la livraison (MVP) |
-| `app/api/webhook/cinetpay/route.ts` | À créer en Phase 2 |
+| `app/api/paiement/route.ts` | Crée une session de paiement CinetPay |
+| `app/api/webhook/cinetpay/route.ts` | Reçoit la confirmation CinetPay |
+| `lib/cinetpay.ts` | Client CinetPay (init, verify) |
+
+---
+
+## Variables d'environnement nécessaires (Phase 2)
+
+À ajouter dans `.env.local` et dans Vercel → Environment Variables :
+
+```env
+CINETPAY_API_KEY=ta_cle_api_cinetpay
+CINETPAY_SITE_ID=ton_site_id_cinetpay
+CINETPAY_SECRET_KEY=ta_cle_secrete_cinetpay
+NEXT_PUBLIC_BASE_URL=https://nyosi.cm
+```
+
+Ces variables ne sont **pas** encore dans le projet. Elles seront ajoutées lors de l'activation du paiement mobile.

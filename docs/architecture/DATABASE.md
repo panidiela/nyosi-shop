@@ -83,7 +83,7 @@ CREATE TABLE order_items (
 );
 ```
 
-### Table : `payments` (paiements Mobile Money — Phase 2)
+### Table : `payments` (paiements mobiles — Phase 2)
 
 ```sql
 CREATE TABLE payments (

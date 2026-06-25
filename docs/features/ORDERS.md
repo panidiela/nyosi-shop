@@ -120,7 +120,7 @@ En Phase 2 : intégration CinetPay pour MTN MoMo et Orange Money.
 - [ ] Notification SMS au client
 - [ ] Tableau de bord commerçant (liste des commandes reçues)
 - [ ] Statut de commande (en préparation / en livraison / livré)
-- [ ] Paiement Mobile Money en ligne
+- [ ] Paiement mobile en ligne (CinetPay)
 - [ ] Historique des commandes pour le client
 
 ---

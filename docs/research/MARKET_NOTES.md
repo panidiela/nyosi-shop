@@ -21,7 +21,7 @@
 
 ### Les acheteurs
 - Commandent sur WhatsApp (message direct) ou Facebook (commentaires, DM) directement
-- Paient en Mobile Money ou à la livraison (préférence MoMo pour la confiance)
+- Paient par paiement mobile ou à la livraison (MTN MoMo, Orange Money — préférence paiement à la réception pour la confiance)
 - Veulent une confirmation rapide — sans réponse dans l'heure, ils vont ailleurs
 - Font confiance aux vendeurs qu'ils connaissent déjà
 

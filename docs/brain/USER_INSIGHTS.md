@@ -35,7 +35,7 @@ Le soir, le vendeur a tapé sur son téléphone toute la journée. Il a géré 5
 
 - Les vendeurs postent leurs produits sur WhatsApp Status chaque matin ET sur Facebook (posts, stories, groupes)
 - Les commandes arrivent principalement entre 7h–9h et 12h–14h — par message WhatsApp et commentaires Facebook
-- Le paiement Mobile Money est naturel — tout le monde sait faire MTN MoMo
+- Le paiement mobile est naturel — tout le monde sait utiliser MTN MoMo ou Orange Money
 - Les clients font plus confiance à un vendeur qu'ils connaissent déjà
 - Un lien dans un message WhatsApp ou un post Facebook est cliqué naturellement
 - Les clients veulent une confirmation rapide — sinon ils doutent et ils relancent

@@ -18,7 +18,7 @@ Un lien. Une boutique. Des commandes automatiques.
 Le commerçant crée sa boutique Nyosi en 2 minutes.
 Il obtient un lien : nyosi.cm/marie-gateaux
 Il le met dans sa bio WhatsApp, ses stories Facebook, ses posts, ses messages.
-Le client clique, commande, paie en Mobile Money.
+Le client clique, commande, paie par paiement mobile.
 Le vendeur reçoit une notification. Aucun message à gérer.
 
 ## Proposition de valeur
@@ -30,7 +30,7 @@ Le vendeur reçoit une notification. Aucun message à gérer.
 - Créer sa boutique en 2 minutes
 - Ajouter ses produits avec photos et prix en FCFA
 - Recevoir les commandes dans un tableau de bord simple
-- Recevoir le paiement Mobile Money directement
+- Recevoir le paiement mobile directement
 - Savoir qui a commandé quoi, pour quand, et qui a payé
 
 ### Pour le client du vendeur
@@ -50,7 +50,7 @@ Le vendeur reçoit une notification. Aucun message à gérer.
 
 ## Lien avec Nyosi Caisse
 Nyosi est une marque. Deux produits :
-- Nyosi (ce projet) → boutique en ligne, commandes, paiement Mobile Money
+- Nyosi (ce projet) → boutique en ligne, commandes, paiement mobile
 - Nyosi Caisse → gestion stock, shifts, caissières (déjà en test au café de Pani)
 
 À terme : une commande Nyosi entre automatiquement dans Nyosi Caisse. Le stock se met à jour tout seul. C'est là que la marque devient imbattable.
@@ -64,7 +64,7 @@ Nyosi est une marque. Deux produits :
 
 ## Lien avec Nyosi Caisse
 Nyosi est une marque. Deux produits :
-- Nyosi (ce projet) → boutique en ligne, commandes, paiement Mobile Money
+- Nyosi (ce projet) → boutique en ligne, commandes, paiement mobile
 - Nyosi Caisse → gestion stock, shifts, caissières (déjà en test au café de Pani)
 
 À terme : une commande Nyosi entre automatiquement dans Nyosi Caisse. Le stock se met à jour tout seul. C'est là que la marque devient imbattable.
@@ -85,7 +85,7 @@ Le MVP est fonctionnel et déployé sur Vercel. Il comprend :
 | Confirmation NY-XXXX | ✅ Livré |
 | Partage lien (navigator.share) | ✅ Livré |
 | Design System v1.0 (palette verte) | ✅ Livré |
-| Paiement Mobile Money (CinetPay) | ⏳ Phase 2 |
+| Paiement mobile (CinetPay) | ⏳ Phase 2 |
 | Compte vendeur / Auth | ⏳ Phase 2 |
 | Notifications WhatsApp automatiques | ⏳ Phase 2 |
 | Tableau de bord vendeur | ⏳ Phase 2 |

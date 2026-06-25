@@ -49,7 +49,7 @@ En Phase 2 avec les API Routes Next.js :
 
 ### Paiements
 
-CinetPay gère la sécurité des transactions Mobile Money.
+CinetPay gère la sécurité des transactions de paiement mobile (MTN MoMo, Orange Money, etc.).
 Nyosi ne stocke jamais de données de carte bancaire (aucune carte bancaire acceptée).
 Les webhooks CinetPay sont vérifiés avec une signature HMAC.
 

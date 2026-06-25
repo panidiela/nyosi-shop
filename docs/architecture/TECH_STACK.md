@@ -111,7 +111,7 @@ Preview URLs : chaque branche ou PR obtient une URL de test unique (ex: `nyosi-s
 
 ### CinetPay
 
-- Passerelle de paiement Mobile Money
+- Passerelle de paiement mobile (MTN MoMo, Orange Money, etc.)
 - Supporte MTN MoMo et Orange Money Cameroun
 - API REST simple à intégrer
 - Frais : ~2–3% par transaction
