@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { lireBoutique, sauvegarderCommande } from "@/lib/boutique";
 
 type Produit = { nom: string; prix: string; description: string; photo?: string };
 type Boutique = {
@@ -48,9 +49,10 @@ export default function PageBoutique() {
   const [erreurCommande, setErreurCommande] = useState("");
 
   useEffect(() => {
-    const data = localStorage.getItem(`nyosi_boutique_${slug}`);
-    if (data) setBoutique(JSON.parse(data));
-    setChargement(false);
+    lireBoutique(slug).then((b) => {
+      setBoutique(b);
+      setChargement(false);
+    });
   }, [slug]);
 
   /* ── PANIER ── */
@@ -81,7 +83,7 @@ export default function PageBoutique() {
   }
 
   /* ── VALIDATION COMMANDE ── */
-  function validerCommande(e: React.FormEvent) {
+  async function validerCommande(e: React.FormEvent) {
     e.preventDefault();
     if (!commande.nom.trim()) return setErreurCommande("Le nom complet est obligatoire.");
     if (!commande.telephone.trim()) return setErreurCommande("Le téléphone est obligatoire.");
@@ -93,6 +95,28 @@ export default function PageBoutique() {
     setErreurCommande("");
     const num = genererNumeroCommande();
     setNumeroCommande(num);
+
+    // Enregistrement dans Supabase (silencieux si non configuré)
+    await sauvegarderCommande({
+      boutique_slug: slug,
+      numero: num,
+      client_nom: commande.nom,
+      client_telephone: commande.telephone,
+      ville: commande.ville,
+      quartier: commande.quartier,
+      adresse: commande.adresse,
+      date_livraison: commande.date,
+      heure_livraison: commande.heure,
+      instructions: commande.instructions,
+      total: totalPanier,
+      lignes: panier.map((l) => ({
+        produit_nom: l.produit.nom,
+        produit_prix: parseInt(l.produit.prix, 10),
+        quantite: l.quantite,
+        sous_total: parseInt(l.produit.prix, 10) * l.quantite,
+      })),
+    });
+
     setEcran("confirmation");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }

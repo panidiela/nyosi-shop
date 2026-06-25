@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { sauvegarderBoutique } from "@/lib/boutique";
 
 type Produit = { nom: string; prix: string; description: string; photo: string };
 type DraftBoutique = {
@@ -129,7 +130,7 @@ export default function AjouterProduits() {
     if (produits.length > 1) setProduits((prev) => prev.filter((_, idx) => idx !== i));
   }
 
-  function creer(e: React.FormEvent) {
+  async function creer(e: React.FormEvent) {
     e.preventDefault();
     if (!produits[0].nom.trim()) return setErreur("Ajoute au moins un produit avec un nom.");
     if (!produits[0].prix.trim()) return setErreur("Ajoute le prix de ton premier produit.");
@@ -137,8 +138,10 @@ export default function AjouterProduits() {
 
     const s = slugify(draft!.nom);
     const produitsValides = produits.filter((p) => p.nom.trim() && p.prix.trim());
-    const boutique = { ...draft, slug: s, produits: produitsValides };
-    localStorage.setItem(`nyosi_boutique_${s}`, JSON.stringify(boutique));
+    const boutique = { ...draft!, slug: s, produits: produitsValides };
+
+    // Sauvegarde dans Supabase + localStorage (fallback automatique)
+    await sauvegarderBoutique(boutique);
     localStorage.removeItem("nyosi_draft_boutique");
 
     setLienCree(`${window.location.host}/${s}`);
