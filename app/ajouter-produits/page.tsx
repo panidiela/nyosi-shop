@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { sauvegarderBoutique } from "@/lib/boutique";
+import { setSlugActuel } from "@/lib/dashboard";
 
 type Produit = { nom: string; prix: string; description: string; photo: string };
 type DraftBoutique = {
@@ -143,6 +144,8 @@ export default function AjouterProduits() {
     // Sauvegarde dans Supabase + localStorage (fallback automatique)
     await sauvegarderBoutique(boutique);
     localStorage.removeItem("nyosi_draft_boutique");
+    // Mémorise la boutique active pour le dashboard (multi-boutique ready)
+    setSlugActuel(s);
 
     setLienCree(`${window.location.host}/${s}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
