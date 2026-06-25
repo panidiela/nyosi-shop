@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type Produit = { nom: string; prix: string; description: string };
+type Produit = { nom: string; prix: string; description: string; photo: string };
 type DraftBoutique = {
   nom: string; categorie: string; whatsapp: string; facebook: string;
   description: string; ville: string; quartier: string;
@@ -20,7 +21,89 @@ function slugify(nom: string) {
     .slice(0, 40);
 }
 
-const produitVide = (): Produit => ({ nom: "", prix: "", description: "" });
+const produitVide = (): Produit => ({ nom: "", prix: "", description: "", photo: "" });
+
+/* Redimensionne et compresse la photo avant de la stocker */
+function compresserPhoto(file: File): Promise<string> {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const MAX = 800;
+        let { width, height } = img;
+        if (width > MAX) { height = Math.round((height * MAX) / width); width = MAX; }
+        if (height > MAX) { width = Math.round((width * MAX) / height); height = MAX; }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d")?.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", 0.72));
+      };
+      img.src = e.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function CartePhoto({
+  photo, index, onChange,
+}: { photo: string; index: number; onChange: (base64: string) => void }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFichier(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const base64 = await compresserPhoto(file);
+    onChange(base64);
+  }
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-gray-600 mb-1">
+        Photo du produit <span className="text-gray-400 font-normal">(optionnel)</span>
+      </label>
+
+      {/* Zone photo */}
+      <div
+        onClick={() => inputRef.current?.click()}
+        className="w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-300 bg-gray-100 flex items-center justify-center cursor-pointer active:opacity-80 relative"
+      >
+        {photo ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={photo} alt="Aperçu" className="w-full h-full object-cover" />
+        ) : (
+          <div className="flex flex-col items-center gap-2 text-gray-400">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span className="text-sm font-medium">Choisir une photo</span>
+            <span className="text-xs">Galerie ou appareil photo</span>
+          </div>
+        )}
+
+        {/* Bouton changer si photo déjà choisie */}
+        {photo && (
+          <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded-lg">
+            Changer
+          </div>
+        )}
+      </div>
+
+      {/* Input caché — accept="image/*" ouvre galerie + appareil photo sur Android */}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        capture={undefined}
+        id={`photo-${index}`}
+        className="hidden"
+        onChange={handleFichier}
+      />
+    </div>
+  );
+}
 
 export default function AjouterProduits() {
   const router = useRouter();
@@ -33,14 +116,11 @@ export default function AjouterProduits() {
 
   useEffect(() => {
     const data = localStorage.getItem("nyosi_draft_boutique");
-    if (!data) {
-      router.push("/creer-boutique");
-      return;
-    }
+    if (!data) { router.push("/creer-boutique"); return; }
     setDraft(JSON.parse(data));
   }, [router]);
 
-  function setProduit(i: number, champ: keyof Produit, val: string) {
+  function setProduitChamp(i: number, champ: keyof Produit, val: string) {
     setProduits((prev) => prev.map((p, idx) => idx === i ? { ...p, [champ]: val } : p));
   }
 
@@ -64,8 +144,7 @@ export default function AjouterProduits() {
     localStorage.setItem(`nyosi_boutique_${s}`, JSON.stringify(boutique));
     localStorage.removeItem("nyosi_draft_boutique");
 
-    const origine = window.location.host;
-    setLienCree(`${origine}/${s}`);
+    setLienCree(`${window.location.host}/${s}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -130,8 +209,7 @@ export default function AjouterProduits() {
 
           <a
             href={`/${lienCree.split("/").pop()}`}
-            className="block text-sm text-[#FCB001] underline"
-            style={{ color: "#000", textDecoration: "underline" }}
+            className="block text-sm font-semibold underline text-black"
           >
             Voir ma boutique →
           </a>
@@ -146,13 +224,11 @@ export default function AjouterProduits() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* Barre */}
       <div className="bg-[#FCB001] px-4 py-3 flex items-center justify-between">
         <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority />
         <span className="text-xs text-black/60 font-medium">Étape 2 / 2</span>
       </div>
 
-      {/* En-tête */}
       <header className="bg-black text-white px-4 pt-8 pb-6">
         <p className="text-[#FCB001] text-sm font-semibold mb-1">✓ Boutique : {draft.nom}</p>
         <h1 className="text-2xl font-bold mb-2">Tes produits</h1>
@@ -165,7 +241,7 @@ export default function AjouterProduits() {
         <form onSubmit={creer} className="flex flex-col gap-4">
 
           {produits.map((produit, i) => (
-            <div key={i} className="border border-gray-200 rounded-2xl p-4 flex flex-col gap-3 bg-gray-50">
+            <div key={i} className="border border-gray-200 rounded-2xl p-4 flex flex-col gap-4 bg-gray-50">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-bold text-gray-700">
                   Produit {i + 1}
@@ -178,6 +254,13 @@ export default function AjouterProduits() {
                 )}
               </div>
 
+              {/* Photo */}
+              <CartePhoto
+                photo={produit.photo}
+                index={i}
+                onChange={(base64) => setProduitChamp(i, "photo", base64)}
+              />
+
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Nom du produit {i === 0 && <span className="text-red-500">*</span>}
@@ -186,7 +269,7 @@ export default function AjouterProduits() {
                   type="text"
                   placeholder="Ex : Gâteau chocolat 20 personnes"
                   value={produit.nom}
-                  onChange={(e) => setProduit(i, "nom", e.target.value)}
+                  onChange={(e) => setProduitChamp(i, "nom", e.target.value)}
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
                 />
               </div>
@@ -200,7 +283,7 @@ export default function AjouterProduits() {
                   inputMode="numeric"
                   placeholder="Ex : 15000"
                   value={produit.prix}
-                  onChange={(e) => setProduit(i, "prix", e.target.value)}
+                  onChange={(e) => setProduitChamp(i, "prix", e.target.value)}
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
                 />
               </div>
@@ -213,7 +296,7 @@ export default function AjouterProduits() {
                   type="text"
                   placeholder="Ex : Pour 20 personnes, parfum chocolat noir"
                   value={produit.description}
-                  onChange={(e) => setProduit(i, "description", e.target.value)}
+                  onChange={(e) => setProduitChamp(i, "description", e.target.value)}
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
                 />
               </div>

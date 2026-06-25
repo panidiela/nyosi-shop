@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type Produit = { nom: string; prix: string; description: string };
+type Produit = { nom: string; prix: string; description: string; photo?: string };
 type Boutique = {
   slug: string; nom: string; categorie: string; whatsapp: string;
   facebook: string; description: string; ville: string; quartier: string;
@@ -382,40 +382,59 @@ export default function PageBoutique() {
             {produits.map((produit, i) => {
               const q = qte(produit);
               return (
-                <div key={i} className="bg-white border border-gray-100 rounded-2xl shadow-sm p-4">
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-900 text-base leading-tight">{produit.nom}</p>
-                      {produit.description && (
-                        <p className="text-gray-500 text-sm mt-0.5">{produit.description}</p>
-                      )}
-                      <p className="text-black font-bold text-lg mt-1">{formatPrix(produit.prix)}</p>
-                    </div>
-                  </div>
-                  {q === 0 ? (
-                    <button
-                      onClick={() => changerQuantite(produit, 1)}
-                      className="w-full bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold py-3 rounded-xl text-sm transition-colors"
-                    >
-                      Ajouter au panier
-                    </button>
+                <div key={i} className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+
+                  {/* Photo ou placeholder */}
+                  {produit.photo ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={produit.photo}
+                      alt={produit.nom}
+                      className="w-full aspect-[4/3] object-cover"
+                    />
                   ) : (
-                    <div className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2">
-                      <button
-                        onClick={() => changerQuantite(produit, -1)}
-                        className="w-10 h-10 bg-black text-[#FCB001] font-bold rounded-xl text-xl flex items-center justify-center"
-                      >
-                        −
-                      </button>
-                      <span className="font-bold text-black text-lg">{q}</span>
-                      <button
-                        onClick={() => changerQuantite(produit, 1)}
-                        className="w-10 h-10 bg-[#FCB001] text-black font-bold rounded-xl text-xl flex items-center justify-center"
-                      >
-                        +
-                      </button>
+                    <div className="w-full aspect-[4/3] bg-gray-100 flex flex-col items-center justify-center gap-1 text-gray-300">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                      </svg>
+                      <span className="text-xs">Photo produit</span>
                     </div>
                   )}
+
+                  {/* Infos produit */}
+                  <div className="p-4">
+                    <p className="font-bold text-gray-900 text-base leading-tight">{produit.nom}</p>
+                    {produit.description && (
+                      <p className="text-gray-500 text-sm mt-0.5">{produit.description}</p>
+                    )}
+                    <p className="text-black font-bold text-lg mt-1 mb-3">{formatPrix(produit.prix)}</p>
+
+                    {q === 0 ? (
+                      <button
+                        onClick={() => changerQuantite(produit, 1)}
+                        className="w-full bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold py-3 rounded-xl text-sm transition-colors"
+                      >
+                        Ajouter au panier
+                      </button>
+                    ) : (
+                      <div className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2">
+                        <button
+                          onClick={() => changerQuantite(produit, -1)}
+                          className="w-10 h-10 bg-black text-[#FCB001] font-bold rounded-xl text-xl flex items-center justify-center"
+                        >
+                          −
+                        </button>
+                        <span className="font-bold text-black text-lg">{q}</span>
+                        <button
+                          onClick={() => changerQuantite(produit, 1)}
+                          className="w-10 h-10 bg-[#FCB001] text-black font-bold rounded-xl text-xl flex items-center justify-center"
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}
