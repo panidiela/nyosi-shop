@@ -59,3 +59,31 @@ Le soir, le vendeur a tapé sur son téléphone toute la journée. Il a géré 5
 > "Je passe mes journées à répondre sur WhatsApp. C'est fatigant." — À collecter
 > "Des fois j'oublie des commandes et le client est fâché." — À collecter
 > "Je voudrais quelque chose de simple." — À collecter
+
+---
+
+## Parcours type du client final (acheteur)
+
+1. Reçoit un lien Nyosi dans un message WhatsApp ou un post Facebook
+2. Clique → la boutique s'ouvre dans Chrome Android
+3. Voit la carte de bienvenue "Bonjour 👋 Commandez directement sans m'écrire"
+4. Parcourt les produits avec photos et prix en FCFA
+5. Tape "Ajouter au panier" sur un ou plusieurs produits
+6. La barre flottante verte apparaît en bas : "Commander"
+7. Remplit le formulaire : nom, téléphone, ville, quartier, adresse, date, heure
+8. Confirme → reçoit un numéro de commande NY-XXXX
+9. Attend le contact du commerçant pour la livraison
+
+**Durée estimée de l'expérience client : 1–2 minutes.**
+
+## Parcours type du commerçant (vendeur)
+
+1. Va sur nyosi.cm depuis son Android Chrome
+2. Tape "Créer ma boutique gratuite"
+3. Remplit les infos boutique (nom, catégorie, WhatsApp, Facebook, ville, quartier)
+4. Tape "Continuer" → ajoute ses produits (photo, nom, prix, description)
+5. Tape "Créer ma boutique" → reçoit son lien
+6. Tape "Partager mon lien" → menu natif Android pour envoyer sur WhatsApp, Facebook, etc.
+7. Ses clients commandent → les commandes arrivent (en Phase 2 : tableau de bord + notification)
+
+**Durée de création boutique : 2 minutes.**

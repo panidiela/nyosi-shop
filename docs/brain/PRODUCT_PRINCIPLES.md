@@ -29,3 +29,33 @@ Les pages doivent charger en moins de 3 secondes même en 3G. Le Cameroun n'a pa
 
 ## 10. Pas de compte obligatoire pour le client
 Le client qui achète ne doit pas créer de compte. Il commande, il paie, il reçoit sa confirmation. C'est tout.
+
+---
+
+## Principe directeur de chaque décision produit
+
+Chaque fonctionnalité doit répondre à cette question :
+
+> **"Est-ce que cela réduit les échanges inutiles entre le commerçant et son client ?"**
+
+- Si **oui** → on la développe.
+- Si **non** → elle peut attendre.
+
+## Règle de priorisation UI
+
+Chaque écran a **une seule mission**. Une seule action principale visible. Pas de menus complexes, pas d'options cachées, pas d'onglets.
+
+Exemples :
+- Page d'accueil → une seule action : "Créer ma boutique"
+- Page boutique → une seule action : "Ajouter au panier"
+- Page commande → une seule action : "Confirmer ma commande"
+
+## Ce que Nyosi n'est PAS
+
+- Ce n'est pas un marketplace (il n'y a pas de catalogue global Nyosi)
+- Ce n'est pas un réseau social
+- Ce n'est pas un logiciel de gestion
+- Ce n'est pas une application à télécharger
+- Ce n'est pas un concurrent de Jumia ou Amazon
+
+Nyosi est l'outil qui rend professionnel ce que le vendeur fait déjà — vendre sur WhatsApp et Facebook.

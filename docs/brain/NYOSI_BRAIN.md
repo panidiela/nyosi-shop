@@ -62,5 +62,56 @@ Nyosi est une marque. Deux produits :
 - Personne n'a encore fait ce produit simple, francophone, mobile first, WhatsApp + Facebook First
 - Pani est lui-même le client cible — il connaît la douleur de l'intérieur
 
+## Lien avec Nyosi Caisse
+Nyosi est une marque. Deux produits :
+- Nyosi (ce projet) → boutique en ligne, commandes, paiement Mobile Money
+- Nyosi Caisse → gestion stock, shifts, caissières (déjà en test au café de Pani)
+
+À terme : une commande Nyosi entre automatiquement dans Nyosi Caisse. Le stock se met à jour tout seul. C'est là que la marque devient imbattable.
+
+## État du MVP (mis à jour — Juin 2026)
+
+Le MVP est fonctionnel et déployé sur Vercel. Il comprend :
+
+| Fonctionnalité | Statut |
+|---|---|
+| Création de boutique (2 étapes) | ✅ Livré |
+| Ajout de produits (1–3 produits) | ✅ Livré |
+| Photos produits (base64, compressées) | ✅ Livré |
+| Page boutique dynamique `/[slug]` | ✅ Livré |
+| Panier avec +/- quantité | ✅ Livré |
+| Formulaire de commande complet | ✅ Livré |
+| Paiement à la livraison | ✅ Livré (MVP) |
+| Confirmation NY-XXXX | ✅ Livré |
+| Partage lien (navigator.share) | ✅ Livré |
+| Design System v1.0 (palette verte) | ✅ Livré |
+| Paiement Mobile Money (CinetPay) | ⏳ Phase 2 |
+| Compte vendeur / Auth | ⏳ Phase 2 |
+| Notifications WhatsApp automatiques | ⏳ Phase 2 |
+| Tableau de bord vendeur | ⏳ Phase 2 |
+
+## Architecture technique actuelle (MVP)
+
+- **Frontend** : Next.js 16 App Router + TypeScript + Tailwind CSS
+- **Persistance** : localStorage (navigateur) — pas encore de base de données
+- **Déploiement** : Vercel (automatique via git push)
+- **Images** : base64 compressées côté client (canvas, max 800px, JPEG 72%)
+- **Routes** : `/` `/creer-boutique` `/ajouter-produits` `/[slug]` `/marie-gateaux`
+
+## Design System actuel (v1.0)
+
+| Rôle | Couleur | Code |
+|---|---|---|
+| Header / Navigation | Vert foncé | `#075E54` |
+| Boutons principaux / Prix | Vert | `#25D366` |
+| Fond de l'application | Gris clair | `#F0F2F5` |
+| Cartes / Formulaires | Blanc | `#FFFFFF` |
+| Texte principal | Noir doux | `#1A1A1A` |
+| Texte secondaire | Gris | `#667781` |
+| Bordures | Gris clair | `#E8E8E4` |
+| Accent (logo, badges) | Jaune Nyosi | `#FCB001` |
+
+La palette est inspirée de WhatsApp — familière et rassurante pour les utilisateurs africains.
+
 ## Règle fondamentale
 Rien n'est décidé si ce n'est pas écrit dans ce fichier.

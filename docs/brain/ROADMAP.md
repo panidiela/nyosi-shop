@@ -1,5 +1,20 @@
 # Roadmap Nyosi
 
+> Dernière mise à jour : Juin 2026
+
+## État actuel — MVP livré ✅
+
+Le MVP est fonctionnel. La Phase 1 est considérée comme terminée avec les éléments suivants livrés :
+- Création boutique en 2 étapes
+- Ajout produits + photos
+- Page boutique dynamique `/[slug]`
+- Panier, commande, confirmation NY-XXXX
+- Partage lien (navigator.share)
+- Design System v1.0 (palette WhatsApp verte)
+- Déployé sur Vercel
+
+---
+
 ## Phase 0 — Validation terrain (Semaine 1–2)
 Objectif : confirmer que les clients d'un vendeur utilisent vraiment le lien pour commander.
 
