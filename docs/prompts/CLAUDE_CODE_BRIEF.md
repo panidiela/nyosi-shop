@@ -56,7 +56,13 @@ RÈGLES ABSOLUES :
 - Ne JAMAIS faire de commit — Pani fait toujours lui-même git add, git commit, git push
 - Ne modifier que les fichiers strictement nécessaires
 - Mobile first : parfait sur écran 6 pouces, Chrome Android
-- Pages légères : moins de 3 secondes en 3G
+- Nyosi est conçu pour le Cameroun avec connexion faible (3G instable) — pages légères obligatoires
+- Objectif chargement : moins de 3 secondes en 3G réel (Yaoundé/Douala)
+- Pas d'APK, pas d'application Play Store — web mobile uniquement
+- Pas de vidéos, pas de bibliothèques JS lourdes (> 50 Ko), pas d'animations inutiles
+- Pas de polices Google Fonts — police système Android uniquement
+- Icônes SVG inline uniquement — pas de bibliothèque d'icônes
+- Photos compressées côté client : max 800px, JPEG 72%
 - Interface 100% en français — aucun mot en anglais visible par l'utilisateur
 - Ne casser aucune fonctionnalité existante
 - Ne pas toucher au localStorage sans raison explicite

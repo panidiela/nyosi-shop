@@ -47,11 +47,20 @@ export type Commande = {
    1. Supabase (si configuré)
    2. localStorage (toujours, comme backup)
 ───────────────────────────────────────── */
-export async function sauvegarderBoutique(boutique: Boutique): Promise<void> {
+export type ResultatSauvegarde = {
+  ok: boolean;
+  source: "supabase" | "local";
+  erreur?: string;
+};
+
+export async function sauvegarderBoutique(boutique: Boutique): Promise<ResultatSauvegarde> {
   // localStorage — toujours (backup instantané)
   localStorage.setItem(`nyosi_boutique_${boutique.slug}`, JSON.stringify(boutique));
 
-  if (!supabase) return; // Supabase non configuré → localStorage suffit
+  if (!supabase) {
+    // Supabase non configuré → localStorage seulement
+    return { ok: true, source: "local" };
+  }
 
   try {
     const user = await getUtilisateur();
@@ -75,12 +84,20 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<void> {
       );
 
     if (errBoutique) {
-      console.warn("[Nyosi] Supabase boutique error:", errBoutique.message);
-      return;
+      console.error("[Nyosi] Supabase boutique error:", errBoutique);
+      return { ok: false, source: "local", erreur: errBoutique.message };
     }
 
     // Supprimer les anciens produits et réinsérer
-    await supabase.from("produits").delete().eq("boutique_slug", boutique.slug);
+    const { error: errDelete } = await supabase
+      .from("produits")
+      .delete()
+      .eq("boutique_slug", boutique.slug);
+
+    if (errDelete) {
+      console.error("[Nyosi] Supabase delete produits error:", errDelete);
+      return { ok: false, source: "local", erreur: errDelete.message };
+    }
 
     if (boutique.produits.length > 0) {
       const { error: errProduits } = await supabase.from("produits").insert(
@@ -94,11 +111,16 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<void> {
         }))
       );
       if (errProduits) {
-        console.warn("[Nyosi] Supabase produits error:", errProduits.message);
+        console.error("[Nyosi] Supabase insert produits error:", errProduits);
+        return { ok: false, source: "local", erreur: errProduits.message };
       }
     }
+
+    return { ok: true, source: "supabase" };
   } catch (e) {
-    console.warn("[Nyosi] Supabase indisponible, localStorage utilisé.", e);
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error("[Nyosi] Supabase indisponible, localStorage utilisé.", e);
+    return { ok: false, source: "local", erreur: msg };
   }
 }
 

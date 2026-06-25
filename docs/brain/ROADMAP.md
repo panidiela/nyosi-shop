@@ -20,6 +20,22 @@ Le MVP est fonctionnel et évolue. Les éléments livrés :
 
 ---
 
+## Contraintes techniques permanentes (toutes phases)
+
+Ces règles s'appliquent à chaque phase, sans exception :
+
+- **Web mobile uniquement** — pas d'APK, pas d'application Play Store au MVP
+- **Chrome Android** — navigateur cible prioritaire
+- **Chargement < 3 secondes en 3G** — réseau réel Cameroun (1–3 Mbps)
+- **Pas de vidéos** — trop lourdes sur données mobiles
+- **Pas de bibliothèques JS lourdes** — bundle JS minimal
+- **Photos compressées** — max 800px, JPEG 72% avant stockage
+- **Pas de polices Google Fonts** — police système Android
+
+> Ces contraintes ne disparaissent pas en Phase 2 ou 3. La croissance se fait toujours sur des connexions africaines, pas sur du fibre parisien.
+
+---
+
 ## Phase 0 — Validation terrain (Semaine 1–2)
 Objectif : confirmer que les clients d'un vendeur utilisent vraiment le lien pour commander.
 

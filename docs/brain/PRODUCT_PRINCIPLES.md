@@ -6,8 +6,18 @@ Créer sa boutique doit prendre 2 minutes. Pas de tutoriel. Pas de formation. Pa
 ## 2. Le lien est le produit
 Tout tourne autour du lien. C'est ce que le vendeur partage sur WhatsApp et Facebook. C'est ce que le client clique. C'est la magie de Nyosi. Le lien doit être court, mémorable, partageable en 1 tap — dans une story Facebook, un message WhatsApp, un post, une bio.
 
-## 3. Mobile first Android
-100% des vendeurs cibles sont sur Android. L'expérience doit être parfaite sur un écran de 6 pouces. Pas d'app à télécharger — tout fonctionne dans le navigateur Chrome Android.
+## 3. Web mobile uniquement — pas d'application
+Nyosi est conçu pour le Cameroun, où la connexion est souvent faible (3G instable, données mobiles limitées). Il n'y a pas d'APK, pas d'application Play Store. Tout fonctionne dans Chrome Android, sans rien installer.
+
+**Règles absolues :**
+- Pas d'APK au MVP, pas d'application Play Store
+- Web mobile uniquement — Chrome Android en priorité
+- Chargement rapide même en 3G (objectif : moins de 3 secondes)
+- Pas de vidéos, pas de bibliothèques JS lourdes, pas d'animations inutiles
+- Photos compressées côté client avant envoi (max 800px, JPEG 72%)
+- Pas de polices externes chargées depuis Google Fonts
+- Icônes SVG inline — zéro bibliothèque d'icônes
+- 100% des vendeurs cibles sont sur Android (Samsung Galaxy, Tecno, Itel, Infinix)
 
 ## 4. Zéro message répétitif — pas zéro WhatsApp
 Nyosi ne remplace pas WhatsApp. WhatsApp est le canal de relation entre le commerçant et ses clients — c'est indispensable au Cameroun.

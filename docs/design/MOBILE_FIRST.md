@@ -1,5 +1,21 @@
 # Mobile First — Nyosi
 
+> Nyosi est conçu pour le Cameroun. La connexion est souvent faible, les données mobiles sont limitées, les téléphones sont des Android d'entrée de gamme. Chaque décision technique doit tenir compte de cette réalité.
+
+---
+
+## Contexte réseau Cameroun
+
+| Situation | Réalité terrain |
+|---|---|
+| Réseau dominant | 3G (MTN, Orange) — la 4G existe mais est instable hors des grandes villes |
+| Débit réel 3G | 1–3 Mbps (théorique : 10 Mbps) |
+| Données mobiles | Limitées et payantes — chaque mégaoctet compte |
+| Connexion WiFi | Rare chez les vendeurs solopreneures |
+| Zones prioritaires | Yaoundé, Douala (urbain dense), puis villes secondaires |
+
+**Conséquence directe** : une page qui charge en 1 seconde à Paris peut mettre 8 secondes à Yaoundé en 3G. Une page trop lourde = client parti.
+
 ---
 
 ## Cible matérielle
@@ -9,10 +25,42 @@
 | Système | Android (Chrome) |
 | Largeur d'écran | 360px à 430px |
 | Navigateur | Chrome Android (dernière version) |
-| Réseau | 3G / 4G instable |
-| Téléphones représentatifs | Samsung Galaxy A-series, Tecno, Itel, Infinix |
+| Réseau | 3G instable — objectif < 3 secondes |
+| Téléphones représentatifs | Samsung Galaxy A-series, Tecno Spark, Itel A56, Infinix Hot |
+| RAM typique | 2–4 Go |
 
 Les iPhones (iOS Safari) fonctionnent mais ne sont **pas** la cible prioritaire.
+
+---
+
+## Décisions d'architecture imposées par le contexte réseau
+
+### Pas d'APK — pas d'application Play Store
+Nyosi est une **web app** uniquement au MVP. Un lien WhatsApp → Chrome Android → boutique ouverte. Aucune installation, aucun téléchargement, aucune mise à jour à gérer.
+
+Raisons :
+- Développer une app Play Store est long et coûteux
+- Les mises à jour imposent un téléchargement que les utilisateurs repoussent
+- Chrome Android sur Android 8+ est performant — pas besoin d'app native pour le MVP
+
+### Pas de vidéos
+Les vidéos consomment énormément de données mobiles. Interdites dans Nyosi.
+
+### Pas de bibliothèques JS lourdes
+Chaque bibliothèque ajoutée augmente le poids du JavaScript téléchargé. Règle : si une bibliothèque fait plus de 50 Ko minifiée+gzippée, chercher une alternative ou coder la fonctionnalité manuellement.
+
+Bibliothèques interdites : lodash, moment.js, Material UI, Ant Design, Chakra UI, Radix UI, framer-motion.
+
+### Pas de polices externes
+Google Fonts → requête réseau supplémentaire → 200–400 ms de délai. Nyosi utilise la police système du téléphone.
+
+### Animations limitées
+Uniquement les animations CSS légères définies dans `globals.css` :
+- `card-fade-in` — apparition douce des cartes
+- `sheet-slide-up` — glissement du formulaire
+- `pop-in` — confirmation commande
+
+Pas de bibliothèque d'animation (pas de framer-motion, GSAP, etc.).
 
 ---
 
@@ -71,12 +119,18 @@ Empêche le zoom non désiré sur les inputs.
 | Tailwind CSS | CSS purgé automatiquement — seules les classes utilisées sont incluses |
 | Pas de bibliothèques UI | Pas de Material UI, Ant Design, Radix, etc. |
 
-### Ce qui ralentit (à éviter)
+### Ce qui ralentit (interdit)
 
-- Bibliothèques JS lourdes (lodash, moment, etc.)
-- Polices externes chargées depuis Google Fonts
-- Images non compressées dans le code
-- Requêtes API au chargement de page (pour le MVP localStorage)
+| À éviter | Raison |
+|---|---|
+| Bibliothèques JS lourdes (lodash, moment…) | Augmentent le bundle JS téléchargé |
+| Polices Google Fonts | Requête réseau supplémentaire |
+| Images non compressées | Trop lourdes en 3G |
+| Vidéos | Consomment trop de données mobiles |
+| Bibliothèques d'animation (framer-motion…) | Inutiles et lourdes |
+| Bibliothèques d'icônes (Heroicons, Lucide…) | SVG inline suffit |
+| Requêtes API bloquantes au chargement | Affichage retardé en 3G |
+| APK / Play Store | Hors périmètre MVP |
 
 ---
 

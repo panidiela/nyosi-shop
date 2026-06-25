@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { sauvegarderBoutique } from "@/lib/boutique";
+import { sauvegarderBoutique, type ResultatSauvegarde } from "@/lib/boutique";
 import { setSlugActuel } from "@/lib/dashboard";
 
 type Produit = { nom: string; prix: string; description: string; photo: string };
@@ -112,6 +112,7 @@ export default function AjouterProduits() {
   const [lienCree, setLienCree] = useState("");
   const [lienCopie, setLienCopie] = useState(false);
   const [partageEtat, setPartageEtat] = useState<"idle" | "copie">("idle");
+  const [resultatSauvegarde, setResultatSauvegarde] = useState<ResultatSauvegarde | null>(null);
 
   useEffect(() => {
     const data = localStorage.getItem("nyosi_draft_boutique");
@@ -142,7 +143,8 @@ export default function AjouterProduits() {
     const boutique = { ...draft!, slug: s, produits: produitsValides };
 
     // Sauvegarde dans Supabase + localStorage (fallback automatique)
-    await sauvegarderBoutique(boutique);
+    const resultat = await sauvegarderBoutique(boutique);
+    setResultatSauvegarde(resultat);
     localStorage.removeItem("nyosi_draft_boutique");
     // Mémorise la boutique active pour le dashboard (multi-boutique ready)
     setSlugActuel(s);
@@ -195,7 +197,20 @@ export default function AjouterProduits() {
             <Image src="/logo-vert.png" alt="Nyosi" width={80} height={31} priority className="h-7 w-auto object-contain" />
           </div>
           <h2 className="text-xl font-bold text-[#1A1A1A] mb-1">Boutique créée !</h2>
-          <p className="text-[#667781] text-sm mb-5">{draft?.nom} · {draft?.ville}</p>
+          <p className="text-[#667781] text-sm mb-3">{draft?.nom} · {draft?.ville}</p>
+
+          {resultatSauvegarde?.source === "supabase" ? (
+            <div className="bg-[#E8F5E9] border border-[#A5D6A7] rounded-xl px-4 py-2 mb-4 flex items-center gap-2">
+              <span className="text-[#1B5E20] text-sm font-semibold">✓ Boutique sauvegardée en ligne</span>
+            </div>
+          ) : (
+            <div className="bg-[#FFF8E1] border border-[#FFE082] rounded-xl px-4 py-2 mb-4">
+              <p className="text-[#7B4F00] text-sm font-semibold">⚠️ Boutique sauvegardée uniquement sur cet appareil</p>
+              {resultatSauvegarde?.erreur && (
+                <p className="text-[#7B4F00] text-xs mt-1 break-all">{resultatSauvegarde.erreur}</p>
+              )}
+            </div>
+          )}
 
           <p className="text-[#1A1A1A] text-sm mb-2 font-semibold">Ton lien boutique :</p>
           <div className="bg-[#F0F2F5] border border-[#E8E8E4] rounded-xl px-4 py-3 mb-5 break-all">

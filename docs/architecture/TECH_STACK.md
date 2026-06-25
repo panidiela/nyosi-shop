@@ -118,6 +118,25 @@ Preview URLs : chaque branche ou PR obtient une URL de test unique (ex: `nyosi-s
 
 ---
 
+## Contraintes réseau — Cameroun 3G
+
+Nyosi est conçu pour fonctionner rapidement même sur une connexion 3G instable (1–3 Mbps réel). Ces contraintes dictent les choix techniques.
+
+**Règles imposées par le contexte réseau :**
+
+| Règle | Justification |
+|---|---|
+| Web mobile uniquement — pas d'APK, pas de Play Store | Zéro installation, zéro mise à jour, accessible via un lien WhatsApp |
+| Pas de vidéos | Consomment trop de données mobiles |
+| Pas de bibliothèques JS > 50 Ko | Alourdit le bundle téléchargé |
+| Pas de polices Google Fonts | Requête réseau supplémentaire évitable |
+| Pas de bibliothèques d'icônes | SVG inline = zéro dépendance réseau |
+| Pas de bibliothèques d'animation | CSS natif suffit |
+| Photos compressées côté client | Max 800px, JPEG 72% — poids réduit avant stockage |
+| Objectif chargement | < 3 secondes sur 3G réel (Yaoundé/Douala) |
+
+---
+
 ## Dépendances
 
 ### Dépendances de production
@@ -133,6 +152,10 @@ Preview URLs : chaque branche ou PR obtient une URL de test unique (ex: `nyosi-s
 Pas de bibliothèques UI tierces (pas de Material UI, Ant Design, Chakra, Radix, etc.).
 Pas de bibliothèques d'icônes (icônes SVG inline uniquement).
 Pas de bibliothèques d'animation (animations CSS dans `globals.css`).
+Pas de polices externes (police système Android utilisée).
+Pas de vidéos.
+
+**Règle avant d'ajouter une dépendance :** vérifier son poids sur [bundlephobia.com](https://bundlephobia.com). Si > 50 Ko minifié+gzippé → chercher alternative ou coder manuellement.
 
 ### Dépendances de développement
 
