@@ -4,6 +4,12 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+type Produit = {
+  nom: string;
+  prix: string;
+  description: string;
+};
+
 type Boutique = {
   slug: string;
   nom: string;
@@ -12,7 +18,14 @@ type Boutique = {
   facebook: string;
   description: string;
   ville: string;
+  produits: Produit[];
 };
+
+function formatPrix(prix: string) {
+  const n = parseInt(prix, 10);
+  if (isNaN(n)) return prix + " FCFA";
+  return n.toLocaleString("fr-FR") + " FCFA";
+}
 
 export default function PageBoutique() {
   const params = useParams();
@@ -47,11 +60,11 @@ export default function PageBoutique() {
     }
   }
 
-  function contacterWhatsApp() {
+  function commanderProduit(produit: Produit) {
     if (!boutique) return;
     const numero = boutique.whatsapp.replace(/\D/g, "");
     const message = encodeURIComponent(
-      `Bonjour, j'ai vu ta boutique Nyosi "${boutique.nom}". Je voudrais passer une commande.`
+      `Bonjour, je veux commander : ${produit.nom} à ${formatPrix(produit.prix)} dans votre boutique Nyosi "${boutique.nom}".`
     );
     window.open(`https://wa.me/${numero}?text=${message}`, "_blank");
   }
@@ -86,6 +99,8 @@ export default function PageBoutique() {
     );
   }
 
+  const produits = boutique.produits ?? [];
+
   /* ── PAGE BOUTIQUE ── */
   return (
     <div className="min-h-screen bg-white">
@@ -111,7 +126,7 @@ export default function PageBoutique() {
         )}
       </header>
 
-      {/* Liens réseaux sociaux */}
+      {/* Facebook */}
       {boutique.facebook && (
         <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-2">
           <span className="text-sm text-gray-500">Page Facebook :</span>
@@ -119,17 +134,39 @@ export default function PageBoutique() {
         </div>
       )}
 
-      {/* Boutons d'action */}
-      <main className="px-4 py-6 flex flex-col gap-4">
+      {/* ── PRODUITS ── */}
+      {produits.length > 0 && (
+        <section className="px-4 pt-6 pb-2">
+          <h2 className="text-base font-bold text-gray-800 uppercase tracking-wide mb-4">
+            Nos produits
+          </h2>
+          <div className="flex flex-col gap-4">
+            {produits.map((produit, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-100 rounded-2xl shadow-sm p-4 flex items-center justify-between gap-3"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-gray-900 text-base leading-tight">{produit.nom}</p>
+                  {produit.description && (
+                    <p className="text-gray-500 text-sm mt-0.5 leading-snug">{produit.description}</p>
+                  )}
+                  <p className="text-black font-bold text-lg mt-1">{formatPrix(produit.prix)}</p>
+                </div>
+                <button
+                  onClick={() => commanderProduit(produit)}
+                  className="bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold px-4 py-3 rounded-xl text-sm transition-colors whitespace-nowrap shrink-0"
+                >
+                  Commander
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
-        {/* Commander */}
-        <button
-          onClick={contacterWhatsApp}
-          className="w-full bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold py-4 rounded-2xl text-base transition-colors flex items-center justify-center gap-2"
-        >
-          <span className="text-xl">💬</span>
-          Commander via WhatsApp
-        </button>
+      {/* ── ACTIONS ── */}
+      <section className="px-4 py-6 flex flex-col gap-3">
 
         {/* Partager */}
         <button
@@ -142,8 +179,8 @@ export default function PageBoutique() {
             : "Partager la boutique"}
         </button>
 
-        {/* Infos contact */}
-        <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 mt-2">
+        {/* Contact */}
+        <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">
             Contact du vendeur
           </p>
@@ -164,16 +201,14 @@ export default function PageBoutique() {
             </div>
           )}
         </div>
-      </main>
+      </section>
 
       {/* Pied de page */}
       <footer className="text-center py-8 px-4">
-        <div className="flex items-center justify-center gap-2 mb-1">
+        <div className="flex items-center justify-center mb-1">
           <Image src="/logo.png" alt="Nyosi" width={60} height={23} />
         </div>
-        <p className="text-gray-400 text-xs mt-1">
-          Boutique créée avec Nyosi · nyosi.cm
-        </p>
+        <p className="text-gray-400 text-xs mt-1">Boutique créée avec Nyosi · nyosi.cm</p>
       </footer>
     </div>
   );
