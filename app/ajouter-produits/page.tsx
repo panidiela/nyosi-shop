@@ -60,20 +60,19 @@ function CartePhoto({
 
   return (
     <div>
-      <label className="block text-xs font-semibold text-gray-600 mb-1">
-        Photo du produit <span className="text-gray-400 font-normal">(optionnel)</span>
+      <label className="block text-xs font-semibold text-[#667781] mb-1.5">
+        Photo du produit <span className="text-[#667781] font-normal">(optionnel)</span>
       </label>
 
-      {/* Zone photo */}
       <div
         onClick={() => inputRef.current?.click()}
-        className="w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-300 bg-gray-100 flex items-center justify-center cursor-pointer active:opacity-80 relative"
+        className="w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-dashed border-[#E8E8E4] bg-[#F0F2F5] flex items-center justify-center cursor-pointer active:opacity-70 relative"
       >
         {photo ? (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={photo} alt="Aperçu" className="w-full h-full object-cover" />
         ) : (
-          <div className="flex flex-col items-center gap-2 text-gray-400">
+          <div className="flex flex-col items-center gap-2 text-[#667781]">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
               <circle cx="12" cy="13" r="4"/>
@@ -83,15 +82,13 @@ function CartePhoto({
           </div>
         )}
 
-        {/* Bouton changer si photo déjà choisie */}
         {photo && (
-          <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded-lg">
+          <div className="absolute bottom-2 right-2 bg-[#075E54]/90 text-white text-xs font-semibold px-2 py-1 rounded-lg">
             Changer
           </div>
         )}
       </div>
 
-      {/* Input caché — accept="image/*" ouvre galerie + appareil photo sur Android */}
       <input
         ref={inputRef}
         type="file"
@@ -171,45 +168,53 @@ export default function AjouterProduits() {
   /* ── CONFIRMATION ── */
   if (lienCree) {
     return (
-      <div className="min-h-screen bg-[#FCB001] flex flex-col items-center justify-center px-5 py-10 text-center">
-        <div className="bg-white rounded-2xl shadow-lg p-6 max-w-sm w-full">
-          <div className="flex justify-center mb-5">
-            <Image src="/logo.png" alt="Nyosi" width={100} height={38} priority />
+      <div className="min-h-screen bg-[#F0F2F5] flex flex-col items-center justify-center px-5 py-10">
+        <div className="bg-white rounded-2xl shadow-md p-6 max-w-sm w-full text-center">
+          {/* Check animé */}
+          <div className="w-20 h-20 rounded-full bg-[#25D366] flex items-center justify-center mx-auto mb-5 pop-in">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </div>
-          <div className="text-4xl mb-3">🎉</div>
-          <h2 className="text-2xl font-bold text-black mb-1">{draft?.nom}</h2>
-          <p className="text-gray-500 text-sm mb-5">{draft?.categorie} · {draft?.ville}</p>
 
-          <p className="text-gray-700 text-sm mb-2 font-medium">Ton lien boutique :</p>
-          <div className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 mb-4 break-all">
-            <span className="text-black font-bold text-sm">{lienCree}</span>
+          <div className="flex justify-center mb-3">
+            <Image src="/logo.png" alt="Nyosi" width={80} height={31} priority />
+          </div>
+          <h2 className="text-xl font-bold text-[#1A1A1A] mb-1">Boutique créée !</h2>
+          <p className="text-[#667781] text-sm mb-5">{draft?.nom} · {draft?.ville}</p>
+
+          <p className="text-[#1A1A1A] text-sm mb-2 font-semibold">Ton lien boutique :</p>
+          <div className="bg-[#F0F2F5] border border-[#E8E8E4] rounded-xl px-4 py-3 mb-5 break-all">
+            <span className="text-[#075E54] font-bold text-sm">{lienCree}</span>
           </div>
 
           <button
             onClick={partagerLien}
-            className="w-full bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold py-4 rounded-xl text-base mb-3 flex items-center justify-center gap-2"
+            className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-4 rounded-xl text-base mb-3 flex items-center justify-center gap-2"
           >
-            <Image src="/logo-icon.png" alt="" width={20} height={20} />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
             {partageEtat === "copie" ? "Lien copié !" : "Partager mon lien"}
           </button>
 
           <button
             onClick={copierLien}
-            className="w-full bg-white border-2 border-black text-black font-bold py-3 rounded-xl text-base mb-4 active:bg-gray-100"
+            className="w-full bg-white border border-[#E8E8E4] text-[#1A1A1A] font-bold py-3 rounded-xl text-base mb-5 active:bg-[#F0F2F5]"
           >
             {lienCopie ? "✓ Lien copié !" : "📋 Copier mon lien"}
           </button>
 
-          <div className="bg-black rounded-xl px-4 py-4 mb-5 flex items-start gap-3">
-            <Image src="/logo-icon.png" alt="" width={18} height={18} className="mt-0.5 shrink-0" />
-            <p className="text-[#FCB001] font-semibold text-sm leading-relaxed">
+          <div className="bg-[#075E54] rounded-xl px-4 py-4 mb-5">
+            <p className="text-white font-semibold text-sm leading-relaxed">
               Ta boutique est prête. Partage ce lien sur WhatsApp et Facebook.
             </p>
           </div>
 
           <a
             href={`/${lienCree.split("/").pop()}`}
-            className="block text-sm font-semibold underline text-black"
+            className="block text-sm font-semibold text-[#075E54] underline"
           >
             Voir ma boutique →
           </a>
@@ -220,41 +225,48 @@ export default function AjouterProduits() {
 
   if (!draft) return null;
 
+  const inputCls = "w-full border border-[#E8E8E4] bg-white rounded-xl px-4 py-3 text-base text-[#1A1A1A] placeholder-[#667781] focus:outline-none focus:border-[#25D366] focus:ring-1 focus:ring-[#25D366]";
+
   /* ── FORMULAIRE PRODUITS ── */
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F0F2F5]">
 
-      <div className="bg-[#FCB001] px-4 py-3 flex items-center justify-between">
-        <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority />
-        <span className="text-xs text-black/60 font-medium">Étape 2 / 2</span>
+      <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+        <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" />
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1">
+            <span className="w-6 h-1.5 rounded-full bg-white/30"></span>
+            <span className="w-6 h-1.5 rounded-full bg-white"></span>
+          </div>
+          <span className="text-white/70 text-xs font-medium">Étape 2 / 2</span>
+        </div>
       </div>
 
-      <header className="bg-black text-white px-4 pt-8 pb-6">
-        <p className="text-[#FCB001] text-sm font-semibold mb-1">✓ Boutique : {draft.nom}</p>
-        <h1 className="text-2xl font-bold mb-2">Tes produits</h1>
-        <p className="text-gray-300 text-sm">
+      <div className="bg-[#075E54] px-4 pt-5 pb-8">
+        <p className="text-[#25D366] text-sm font-semibold mb-1">✓ Boutique : {draft.nom}</p>
+        <h1 className="text-white text-2xl font-bold mb-1">Tes produits</h1>
+        <p className="text-white/60 text-sm">
           Ajoute entre 1 et 3 produits. Tu pourras en ajouter d&apos;autres plus tard.
         </p>
-      </header>
+      </div>
 
-      <main className="px-4 py-6">
+      <main className="px-4 -mt-3 pb-8">
         <form onSubmit={creer} className="flex flex-col gap-4">
 
           {produits.map((produit, i) => (
-            <div key={i} className="border border-gray-200 rounded-2xl p-4 flex flex-col gap-4 bg-gray-50">
+            <div key={i} className="bg-white border border-[#E8E8E4] rounded-2xl p-4 flex flex-col gap-4 card-fade-in">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-bold text-gray-700">
+                <p className="text-sm font-bold text-[#1A1A1A]">
                   Produit {i + 1}
                   {i === 0 && <span className="text-red-500 ml-1">*</span>}
                 </p>
                 {produits.length > 1 && (
-                  <button type="button" onClick={() => supprimer(i)} className="text-gray-400 text-sm underline">
+                  <button type="button" onClick={() => supprimer(i)} className="text-[#667781] text-sm underline">
                     Supprimer
                   </button>
                 )}
               </div>
 
-              {/* Photo */}
               <CartePhoto
                 photo={produit.photo}
                 index={i}
@@ -262,7 +274,7 @@ export default function AjouterProduits() {
               />
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                <label className="block text-xs font-semibold text-[#667781] mb-1.5">
                   Nom du produit {i === 0 && <span className="text-red-500">*</span>}
                 </label>
                 <input
@@ -270,12 +282,12 @@ export default function AjouterProduits() {
                   placeholder="Ex : Gâteau chocolat 20 personnes"
                   value={produit.nom}
                   onChange={(e) => setProduitChamp(i, "nom", e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
+                  className={inputCls}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                <label className="block text-xs font-semibold text-[#667781] mb-1.5">
                   Prix en FCFA {i === 0 && <span className="text-red-500">*</span>}
                 </label>
                 <input
@@ -284,20 +296,20 @@ export default function AjouterProduits() {
                   placeholder="Ex : 15000"
                   value={produit.prix}
                   onChange={(e) => setProduitChamp(i, "prix", e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
+                  className={inputCls}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Description <span className="text-gray-400 font-normal">(optionnel)</span>
+                <label className="block text-xs font-semibold text-[#667781] mb-1.5">
+                  Description <span className="text-[#667781] font-normal">(optionnel)</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Ex : Pour 20 personnes, parfum chocolat noir"
                   value={produit.description}
                   onChange={(e) => setProduitChamp(i, "description", e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base bg-white focus:outline-none focus:border-[#FCB001] focus:ring-1 focus:ring-[#FCB001]"
+                  className={inputCls}
                 />
               </div>
             </div>
@@ -307,26 +319,32 @@ export default function AjouterProduits() {
             <button
               type="button"
               onClick={ajouter}
-              className="w-full border-2 border-dashed border-[#FCB001] text-black font-semibold py-3 rounded-2xl text-sm active:bg-[#FCB001]/10"
+              className="w-full border-2 border-dashed border-[#25D366] text-[#075E54] font-semibold py-3 rounded-2xl text-sm active:bg-[#25D366]/10"
             >
               + Ajouter un produit ({produits.length}/3)
             </button>
           )}
 
-          {erreur && <p className="text-red-500 text-sm text-center">{erreur}</p>}
+          {erreur && (
+            <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+              <p className="text-red-600 text-sm text-center">{erreur}</p>
+            </div>
+          )}
 
           <button
             type="submit"
-            className="w-full bg-[#FCB001] hover:bg-[#e0a000] active:bg-[#c48d00] text-black font-bold py-4 rounded-xl text-base transition-colors mt-2 flex items-center justify-center gap-2"
+            className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-4 rounded-xl text-base transition-colors mt-2 flex items-center justify-center gap-2"
           >
             Créer ma boutique
-            <Image src="/logo-icon.png" alt="" width={20} height={20} />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </button>
 
           <button
             type="button"
             onClick={() => router.push("/creer-boutique")}
-            className="text-center text-gray-400 text-sm underline pb-4"
+            className="text-center text-[#667781] text-sm underline pb-4"
           >
             ← Modifier les infos boutique
           </button>
