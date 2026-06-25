@@ -79,11 +79,25 @@ Le soir, le vendeur a tapé sur son téléphone toute la journée. Il a géré 5
 ## Parcours type du commerçant (vendeur)
 
 1. Va sur nyosi.cm depuis son Android Chrome
-2. Tape "Créer ma boutique gratuite"
+2. Tape "Créer ma boutique gratuitement"
 3. Remplit les infos boutique (nom, catégorie, WhatsApp, Facebook, ville, quartier)
 4. Tape "Continuer" → ajoute ses produits (photo, nom, prix, description)
 5. Tape "Créer ma boutique" → reçoit son lien
-6. Tape "Partager mon lien" → menu natif Android pour envoyer sur WhatsApp, Facebook, etc.
-7. Ses clients commandent → les commandes arrivent (en Phase 2 : tableau de bord + notification)
+6. Tape **"Partager ma boutique"** → Nyosi génère automatiquement un message professionnel prêt à envoyer :
+   ```
+   🛍️ Découvrez la boutique [Nom] !
+
+   Découvrez tous nos produits disponibles, choisissez ce qui vous plaît
+   et passez votre commande directement ici :
+
+   🔗 https://nyosi.cm/[slug]
+
+   Nous sommes à votre disposition si vous avez besoin d'informations complémentaires.
+   ```
+   Le menu natif Android s'ouvre → il choisit WhatsApp, Facebook, Messenger, SMS, etc.
+7. Ses clients reçoivent le message, cliquent, commandent
+8. Les commandes apparaissent dans son tableau de bord
 
 **Durée de création boutique : 2 minutes.**
+
+> **Note** : le commerçant ne rédige rien, ne copie rien, ne colle rien. Un seul geste suffit.

@@ -27,10 +27,10 @@ export default function Accueil() {
         </div>
 
         <h1 className="text-white text-3xl font-bold leading-tight mb-3 max-w-xs">
-          Ta boutique en ligne en 2 minutes
+          Crée ta boutique en quelques minutes.
         </h1>
         <p className="text-white/70 text-base mb-10 max-w-xs leading-relaxed">
-          Partage ton lien, reçois tes commandes clairement.
+          Partage ton lien sur WhatsApp et Facebook. Tes clients commandent directement.
         </p>
 
         {/* Bouton principal */}

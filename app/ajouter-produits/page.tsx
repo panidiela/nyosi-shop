@@ -159,12 +159,20 @@ export default function AjouterProduits() {
   }
 
   async function partagerLien() {
-    const texte = `Voici ma boutique Nyosi. Commande ici : https://${lienCree}`;
+    const nomBoutique = draft?.nom ?? "Ma boutique";
+    const url = `https://${lienCree}`;
+    const message =
+      `🛍️ Découvrez la boutique ${nomBoutique} !\n\n` +
+      `Découvrez tous nos produits disponibles, choisissez ce qui vous plaît et passez votre commande directement ici :\n\n` +
+      `🔗 ${url}\n\n` +
+      `Nous sommes à votre disposition si vous avez besoin d'informations complémentaires.`;
+
     if (navigator.share) {
-      try { await navigator.share({ title: draft?.nom ?? "Ma boutique", text: texte }); }
-      catch { /* annulé */ }
+      try {
+        await navigator.share({ title: nomBoutique, text: message });
+      } catch { /* annulé par l'utilisateur */ }
     } else {
-      navigator.clipboard.writeText(`https://${lienCree}`).then(() => {
+      navigator.clipboard.writeText(message).then(() => {
         setPartageEtat("copie");
         setTimeout(() => setPartageEtat("idle"), 3000);
       });

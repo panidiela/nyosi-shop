@@ -1,34 +1,77 @@
-# Fonctionnalité : Partage
+# Fonctionnalité : Partage Intelligent
+
+> **Fonctionnalité signature de Nyosi.**
+> Un clic. Un message déjà rédigé. Un lien. Un partage immédiat. Sans copier-coller.
 
 ---
 
-## Vue d'ensemble
+## Pourquoi c'est la fonctionnalité signature
 
-Le partage du lien boutique est **la fonctionnalité centrale** de Nyosi.
-C'est ce qui permet au commerçant de transformer ses réseaux sociaux en boutique.
+Beaucoup d'applications permettent de créer une boutique. Ce qui différencie Nyosi, c'est qu'un commerçant peut créer sa boutique, puis **la diffuser partout en un seul geste avec un message professionnel déjà rédigé**.
+
+Cette fonctionnalité est parfaitement alignée avec la cible :
+- Les commerçants vendent déjà via WhatsApp et Facebook
+- Ils partagent déjà des messages quotidiennement
+- Nyosi supprime uniquement la partie répétitive et chronophage : rédiger le message
 
 ---
 
-## Implémentation
+## Principe
 
-### `navigator.share()` — partage natif Android
+**Avant Nyosi**, le commerçant devait :
+1. Écrire un texte manuellement
+2. Copier son lien boutique
+3. Coller le lien dans le message
+4. Ouvrir WhatsApp ou Facebook
+5. Coller le tout
 
-Sur Android Chrome, `navigator.share()` ouvre le menu de partage natif du système :
-WhatsApp, Facebook, Messenger, SMS, email, etc.
+**Avec Nyosi**, il fait :
+1. Taper "Partager ma boutique"
+2. Choisir WhatsApp, Facebook, Messenger, SMS, etc.
+3. C'est tout.
+
+---
+
+## Message généré automatiquement
+
+```
+🛍️ Découvrez la boutique [Nom boutique] !
+
+Découvrez tous nos produits disponibles, choisissez ce qui vous plaît
+et passez votre commande directement ici :
+
+🔗 https://nyosi.cm/[slug]
+
+Nous sommes à votre disposition si vous avez besoin d'informations complémentaires.
+```
+
+Ce message est :
+- **Professionnel** — ton neutre et accueillant
+- **Universel** — fonctionne pour tous les secteurs
+- **Prêt à envoyer** — aucune modification nécessaire
+- **Adapté mobile** — lisible dans une notification WhatsApp ou un post Facebook
+
+---
+
+## Implémentation actuelle
 
 ```typescript
-async function partagerLien() {
-  const texte = `Voici ma boutique Nyosi. Commande ici : https://${lienCree}`;
+async function partagerBoutique() {
+  const url = window.location.href; // ou https://${lienCree}
+  const nomBoutique = boutique?.nom ?? "Ma boutique";
+  const message =
+    `🛍️ Découvrez la boutique ${nomBoutique} !\n\n` +
+    `Découvrez tous nos produits disponibles, choisissez ce qui vous plaît et passez votre commande directement ici :\n\n` +
+    `🔗 ${url}\n\n` +
+    `Nous sommes à votre disposition si vous avez besoin d'informations complémentaires.`;
+
   if (navigator.share) {
     try {
-      await navigator.share({
-        title: draft?.nom ?? "Ma boutique",
-        text: texte,
-      });
-    } catch { /* L'utilisateur a annulé — ne rien faire */ }
+      await navigator.share({ title: nomBoutique, text: message });
+    } catch { /* annulé par l'utilisateur */ }
   } else {
-    // Fallback : copier dans le presse-papiers
-    navigator.clipboard.writeText(`https://${lienCree}`).then(() => {
+    // Fallback desktop : copie le message complet dans le presse-papiers
+    navigator.clipboard.writeText(message).then(() => {
       setPartageEtat("copie");
       setTimeout(() => setPartageEtat("idle"), 3000);
     });
@@ -36,24 +79,18 @@ async function partagerLien() {
 }
 ```
 
-### Fallback — copie dans le presse-papiers
+### `navigator.share()` — partage natif Android
+
+Sur Android Chrome, `navigator.share()` ouvre le menu de partage natif du système.
+Le commerçant choisit ensuite : WhatsApp, Facebook, Messenger, Telegram, SMS, email, etc.
+Nyosi ne choisit pas à sa place — il prépare le message, l'utilisateur choisit le canal.
+
+### Fallback desktop
 
 Si `navigator.share` n'est pas disponible (desktop, navigateurs anciens) :
-- `navigator.clipboard.writeText()` copie le lien
-- Le bouton affiche "Lien copié !" pendant 2.5–3 secondes
-
----
-
-## Lien généré
-
-```typescript
-setLienCree(`${window.location.host}/${s}`);
-```
-
-- En développement local : `localhost:3000/marie-gateaux`
-- En production : `nyosi.cm/marie-gateaux` (ou l'URL Vercel)
-
-Pas de `https://` préfixé ici — ajouté au moment du partage/copie.
+- `navigator.clipboard.writeText()` copie **le message complet** (pas juste le lien)
+- Le bouton affiche "Message copié !" pendant 3 secondes
+- Le commerçant peut coller le message directement
 
 ---
 
@@ -61,46 +98,51 @@ Pas de `https://` préfixé ici — ajouté au moment du partage/copie.
 
 ### Pour le commerçant
 
-1. **Page de confirmation après création** (`/ajouter-produits`)
-   - Bouton "Partager mon lien" (navigator.share)
-   - Bouton "Copier mon lien" (clipboard)
+| Endroit | Bouton | Déclencheur |
+|---|---|---|
+| `/ajouter-produits` — confirmation création | "Partager ma boutique" | Après création boutique |
+| `/[slug]` — page boutique publique | "Partager cette boutique" | En bas des produits |
+| `/dashboard` — tableau de bord | "↗ Partager" | Carte "Mon lien boutique" |
 
-2. **Page boutique** (`/[slug]`)
-   - Bouton "Partager cette boutique" dans la section contact
+### Pour le client final
 
-### Pour le client
-
-Non applicable — le client ne partage pas la boutique dans le MVP.
-(À envisager en Phase 3 : "Partager cette boutique avec un ami")
-
----
-
-## Texte de partage
-
-```
-"Voici ma boutique Nyosi. Commande ici : https://nyosi.cm/marie-gateaux"
-```
-
-Ce texte est simple et direct — optimisé pour être lu dans une notification WhatsApp.
+Non applicable pour l'instant.
+À envisager en Phase 3 : "Recommander cette boutique à un ami"
 
 ---
 
-## Open Graph (Phase 3)
+## Roadmap Partage Intelligent
 
-En Phase 3, les pages boutique auront des balises Open Graph pour générer un aperçu riche quand le lien est partagé sur WhatsApp ou Facebook :
+### Phase 3 — Open Graph (aperçu riche)
+Quand le lien est partagé sur WhatsApp ou Facebook, une carte visuelle s'affiche automatiquement :
+image de couverture + nom de la boutique + description.
 
 ```html
 <meta property="og:title" content="Marie Gâteaux — Boutique Nyosi" />
 <meta property="og:description" content="Gâteaux faits maison à Yaoundé. Commandez directement." />
-<meta property="og:image" content="https://nyosi.cm/boutiques/marie-gateaux/cover.jpg" />
+<meta property="og:image" content="https://nyosi.cm/og/marie-gateaux.jpg" />
 <meta property="og:url" content="https://nyosi.cm/marie-gateaux" />
 ```
 
-Cela transforme le lien partagé en une carte visuelle avec image, titre et description.
+### Phase 4 — Messages intelligents par secteur
+Le message de partage sera personnalisé automatiquement selon la catégorie de la boutique.
+
+| Secteur | Message généré |
+|---|---|
+| Alimentation & Gâteaux | "🎂 Commandez vos gâteaux personnalisés chez [nom] !" |
+| Restaurant & Plats cuisinés | "🍽️ Nos plats du jour, livrés chez vous ! Commandez ici :" |
+| Mode & Vêtements | "👗 Découvrez notre nouvelle collection — commandez en ligne !" |
+| Beauté & Cosmétiques | "💄 Vos produits beauté préférés, livrés directement chez vous." |
+| Électronique & Accessoires | "📱 Accessoires et téléphones — prix imbattables, livraison rapide." |
+
+La catégorie boutique est déjà enregistrée en base — cette fonctionnalité ne demande aucun effort supplémentaire au commerçant.
+
+### Phase 4 — Message personnalisable
+Le commerçant pourra modifier le message avant d'envoyer, depuis son tableau de bord.
+Le message généré reste la valeur par défaut.
 
 ---
 
 ## QR Code (Phase 3)
-
 Un QR Code téléchargeable sera proposé pour les flyers physiques et les affiches en boutique.
-Généré côté client via une bibliothèque légère.
+Généré côté client via une bibliothèque légère (ex : `qrcode.react`).

@@ -2,15 +2,20 @@
 
 > Dernière mise à jour : Juin 2026
 
-## État actuel — MVP livré ✅
+## État actuel — MVP + Phase 3 livrés ✅
 
-Le MVP est fonctionnel. La Phase 1 est considérée comme terminée avec les éléments suivants livrés :
+Le MVP est fonctionnel et évolue. Les éléments livrés :
+
 - Création boutique en 2 étapes
-- Ajout produits + photos
-- Page boutique dynamique `/[slug]`
+- Ajout produits + photos (compressées)
+- Page boutique dynamique `/[slug]` — grille 2 colonnes
 - Panier, commande, confirmation NY-XXXX
-- Partage lien (navigator.share)
+- **Partage intelligent** — un clic, message pré-rédigé, `navigator.share` natif
+- Bouton WhatsApp vendeur permanent (visible sans panier)
 - Design System v1.0 (palette WhatsApp verte)
+- Supabase (boutiques + commandes + produits)
+- Tableau de bord vendeur (commandes, produits, boutique)
+- Comptes vendeurs sécurisés (Supabase Auth — Phase 3)
 - Déployé sur Vercel
 
 ---
@@ -48,10 +53,32 @@ Objectif : le client paie directement, la commande est confirmée automatiquemen
 Objectif : les vendeurs recommandent Nyosi spontanément à d'autres vendeurs.
 
 - [ ] QR Code téléchargeable pour flyers et affiches en boutique
-- [ ] Aperçu riche quand le lien est partagé sur WhatsApp et Facebook (image + titre + description — ce qu'on appelle "Open Graph")
+- [ ] **Open Graph** — aperçu riche quand le lien est partagé (image + titre + description dans WhatsApp/Facebook)
 - [ ] Statistiques simples pour le vendeur : commandes du jour / semaine / mois
 - [ ] Statut de commande pour le client (en préparation / en livraison / livré)
 - [ ] Page "Commander à nouveau" pour les clients réguliers
+- [ ] Notifications automatiques (WhatsApp ou SMS) à chaque commande reçue
+
+## Phase 4 — Messages intelligents par secteur (Mois 4–5)
+Objectif : le message de partage est personnalisé selon le type de commerce, sans effort du vendeur.
+
+**Principe :**
+Nyosi sait que Marie vend des gâteaux. Elle vend à Yaoundé. Nyosi génère un message spécifique à son secteur.
+
+**Exemples de messages par secteur :**
+
+| Secteur | Message généré |
+|---|---|
+| Gâteaux & pâtisserie | "🎂 Commandez vos gâteaux personnalisés chez [nom] !" |
+| Restaurant & plats cuisinés | "🍽️ Commandez nos plats du jour, livrés chez vous !" |
+| Mode & vêtements | "👗 Découvrez notre nouvelle collection — commandez en ligne !" |
+| Cosmétiques & beauté | "💄 Vos produits beauté préférés, livrés directement chez vous." |
+| Téléphones & électronique | "📱 Accessoires et téléphones — prix imbattables, livraison rapide." |
+
+**Comment ça marche techniquement :**
+- La catégorie boutique est déjà enregistrée
+- Nyosi choisit automatiquement le bon template
+- Le commerçant peut modifier le message avant d'envoyer (futur)
 
 ## Phase 4 — Monétisation (Mois 4–5)
 Objectif : passer de gratuit à payant sans perdre les utilisateurs.

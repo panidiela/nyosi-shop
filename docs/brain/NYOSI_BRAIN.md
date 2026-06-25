@@ -22,7 +22,11 @@ Le client clique, commande, paie par paiement mobile.
 Le vendeur reçoit une notification. Aucun message à gérer.
 
 ## Proposition de valeur
-"Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message."
+"Nyosi transforme ton WhatsApp et Facebook en boutique. Tes clients découvrent tes produits, commandent directement et te contactent uniquement si nécessaire."
+
+> Ancienne version (archivée) : "Nyosi transforme ton WhatsApp et ton Facebook en boutique — tes clients commandent sans t'envoyer un seul message."
+>
+> **Pourquoi le changement** : la nouvelle version est plus complète. Elle reconnaît que WhatsApp reste indispensable et ne prétend pas "supprimer" les messages — elle supprime uniquement les messages inutiles et répétitifs.
 
 ## Ce que Nyosi fait concrètement
 
@@ -76,19 +80,24 @@ Le MVP est fonctionnel et déployé sur Vercel. Il comprend :
 | Fonctionnalité | Statut |
 |---|---|
 | Création de boutique (2 étapes) | ✅ Livré |
-| Ajout de produits (1–3 produits) | ✅ Livré |
+| Ajout de produits avec photos | ✅ Livré |
 | Photos produits (base64, compressées) | ✅ Livré |
 | Page boutique dynamique `/[slug]` | ✅ Livré |
+| Produits en grille 2 colonnes (mobile) | ✅ Livré |
 | Panier avec +/- quantité | ✅ Livré |
 | Formulaire de commande complet | ✅ Livré |
 | Paiement à la livraison | ✅ Livré (MVP) |
 | Confirmation NY-XXXX | ✅ Livré |
-| Partage lien (navigator.share) | ✅ Livré |
+| **Partage intelligent** (message pré-rédigé + navigator.share) | ✅ Livré |
+| Bouton WhatsApp vendeur permanent | ✅ Livré |
 | Design System v1.0 (palette verte) | ✅ Livré |
+| Supabase (boutiques + commandes) | ✅ Livré |
+| Tableau de bord vendeur (commandes, produits, boutique) | ✅ Livré |
+| Compte vendeur / Auth (Phase 3) | ✅ Livré |
 | Paiement mobile (CinetPay) | ⏳ Phase 2 |
-| Compte vendeur / Auth | ⏳ Phase 2 |
-| Notifications WhatsApp automatiques | ⏳ Phase 2 |
-| Tableau de bord vendeur | ⏳ Phase 2 |
+| Notifications WhatsApp automatiques | ⏳ Phase 3 |
+| Open Graph (aperçu riche WhatsApp/Facebook) | ⏳ Phase 3 |
+| Messages de partage par secteur | ⏳ Phase 4 |
 
 ## Architecture technique actuelle (MVP)
 

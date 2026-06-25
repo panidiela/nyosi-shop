@@ -9,8 +9,18 @@ Tout tourne autour du lien. C'est ce que le vendeur partage sur WhatsApp et Face
 ## 3. Mobile first Android
 100% des vendeurs cibles sont sur Android. L'expérience doit être parfaite sur un écran de 6 pouces. Pas d'app à télécharger — tout fonctionne dans le navigateur Chrome Android.
 
-## 4. Zéro message à gérer
-Le but est que le vendeur n'ait plus à répondre à des messages WhatsApp ou Facebook pour prendre une commande. Si Nyosi génère plus de messages — on a échoué.
+## 4. Zéro message répétitif — pas zéro WhatsApp
+Nyosi ne remplace pas WhatsApp. WhatsApp est le canal de relation entre le commerçant et ses clients — c'est indispensable au Cameroun.
+
+Ce que Nyosi supprime : les messages inutiles et répétitifs :
+- "C'est combien ?"
+- "Tu as quoi en stock ?"
+- "Envoie les photos."
+- "Comment on fait pour commander ?"
+
+Ces informations sont directement disponibles dans la boutique.
+
+Ce que Nyosi conserve et respecte : le contact humain. Le client peut toujours contacter le commerçant sur WhatsApp. Le bouton WhatsApp est visible en permanence sur la page boutique.
 
 ## 5. Paiement mobile natif
 Pas de carte bancaire. Pas de PayPal. Pas de virement. Le paiement doit fonctionner comme les Camerounais paient déjà — compatible avec MTN MoMo, Orange Money et autres opérateurs mobiles.
@@ -29,6 +39,19 @@ Les pages doivent charger en moins de 3 secondes même en 3G. Le Cameroun n'a pa
 
 ## 10. Pas de compte obligatoire pour le client
 Le client qui achète ne doit pas créer de compte. Il commande, il paie, il reçoit sa confirmation. C'est tout.
+
+---
+
+## 11. Le partage est la fonctionnalité signature
+"Partager ma boutique" est le moment le plus important du parcours vendeur. C'est le geste qui transforme une boutique créée en commandes reçues.
+
+Ce geste doit être **un clic, zéro effort** :
+- Un message professionnel déjà rédigé
+- Le lien de la boutique inclus automatiquement
+- Le menu natif du téléphone s'ouvre (WhatsApp, Facebook, SMS, Messenger, etc.)
+- Le commerçant choisit où envoyer — c'est tout
+
+Aucun copier-coller. Aucune rédaction. Un geste.
 
 ---
 
@@ -57,5 +80,8 @@ Exemples :
 - Ce n'est pas un logiciel de gestion
 - Ce n'est pas une application à télécharger
 - Ce n'est pas un concurrent de Jumia ou Amazon
+- Ce n'est pas un remplacement de WhatsApp
 
 Nyosi est l'outil qui rend professionnel ce que le vendeur fait déjà — vendre sur WhatsApp et Facebook.
+
+WhatsApp et Facebook restent les **principaux canaux de vente et de relation client**. Nyosi est leur extension commerciale : il prend en charge la partie "catalogue + commande + paiement", pour que les échanges WhatsApp restent humains et utiles.

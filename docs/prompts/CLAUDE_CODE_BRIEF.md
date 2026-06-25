@@ -22,10 +22,11 @@ AVANT DE FAIRE QUOI QUE CE SOIT, lis ces fichiers :
 ---
 
 CONTEXTE PROJET :
-Nyosi est une boutique en ligne instantanée pour commerçants africains francophones.
-Un vendeur crée sa boutique en 2 minutes, obtient un lien, le partage sur WhatsApp et Facebook.
+Nyosi transforme WhatsApp et Facebook en boutique. Tes clients découvrent tes produits, commandent directement et te contactent uniquement si nécessaire.
+
+Un vendeur crée sa boutique en 2 minutes, obtient un lien, le partage sur WhatsApp et Facebook avec un message professionnel déjà rédigé (Partage Intelligent).
 Les clients commandent depuis leur téléphone Android.
-Le vendeur reçoit les commandes. Aucun message WhatsApp ou commentaire Facebook à gérer.
+WhatsApp reste indispensable — Nyosi supprime uniquement les messages répétitifs ("C'est combien ?", "T'as quoi ?").
 
 STACK TECHNIQUE (MVP actuel) :
 - Next.js 16 App Router + TypeScript + Tailwind CSS
@@ -59,8 +60,12 @@ RÈGLES ABSOLUES :
 - Interface 100% en français — aucun mot en anglais visible par l'utilisateur
 - Ne casser aucune fonctionnalité existante
 - Ne pas toucher au localStorage sans raison explicite
-- Logo sur fond vert : brightness-0 invert (blanc)
-- Logo sur fond blanc : version normale (couleur)
+- Logo sur fond vert : utiliser /logo-blanc.png avec className="h-7 w-auto object-contain"
+- Logo sur fond blanc : utiliser /logo-vert.png avec className="h-7 w-auto object-contain"
+- Ne jamais utiliser brightness-0 invert (logo-blanc.png existe)
+- WhatsApp doit rester accessible — ne jamais supprimer le bouton WhatsApp de la page boutique
+- Le bouton principal de la page d'accueil doit toujours vendre le bénéfice : "Créer ma boutique gratuitement" — pas "Créer un compte"
+- Le Partage Intelligent est la fonctionnalité signature : conserver le message pré-rédigé dans toutes les fonctions partager
 
 ---
 

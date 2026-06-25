@@ -122,13 +122,20 @@ export default function PageBoutique() {
   }
 
   async function partagerBoutique() {
-    const lien = window.location.href;
-    const texte = `Voici ma boutique Nyosi. Commande ici : ${lien}`;
+    const url = window.location.href;
+    const nomBoutique = boutique?.nom ?? "Boutique Nyosi";
+    const message =
+      `🛍️ Découvrez la boutique ${nomBoutique} !\n\n` +
+      `Découvrez tous nos produits disponibles, choisissez ce qui vous plaît et passez votre commande directement ici :\n\n` +
+      `🔗 ${url}\n\n` +
+      `Nous sommes à votre disposition si vous avez besoin d'informations complémentaires.`;
+
     if (navigator.share) {
-      try { await navigator.share({ title: boutique?.nom ?? "Boutique Nyosi", text: texte }); }
-      catch { /* annulé */ }
+      try {
+        await navigator.share({ title: nomBoutique, text: message });
+      } catch { /* annulé par l'utilisateur */ }
     } else {
-      navigator.clipboard.writeText(lien).then(() => {
+      navigator.clipboard.writeText(message).then(() => {
         setPartageEtat("copie");
         setTimeout(() => setPartageEtat("idle"), 3000);
       });
@@ -471,7 +478,7 @@ export default function PageBoutique() {
             <h2 className="text-xs font-bold text-[#667781] uppercase tracking-widest mb-3">
               Nos produits
             </h2>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 min-[380px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {produits.map((produit, i) => {
                 const q = qte(produit);
                 return (

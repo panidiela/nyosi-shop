@@ -137,26 +137,26 @@ export default function BoutiqueMarie() {
         <h2 className="text-xs font-bold text-[#667781] uppercase tracking-widest mb-3">
           Nos gâteaux
         </h2>
-        <div className="flex flex-col gap-3 mb-6">
+        <div className="grid grid-cols-1 min-[380px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-6">
           {produits.map((produit, i) => (
             <div
               key={produit.id}
-              className="bg-white rounded-2xl shadow-sm overflow-hidden card-fade-in"
+              className="bg-white rounded-2xl shadow-sm overflow-hidden card-fade-in flex flex-col"
               style={{ animationDelay: `${i * 0.08}s` }}
             >
               {/* Placeholder photo */}
-              <div className="w-full aspect-[4/3] bg-[#F0F2F5] flex flex-col items-center justify-center gap-1">
+              <div className="w-full aspect-square bg-[#F0F2F5] flex items-center justify-center">
                 <span className="text-4xl">🎂</span>
               </div>
 
-              <div className="p-4">
-                <p className="font-bold text-[#1A1A1A] text-base leading-tight">{produit.nom}</p>
-                <p className="text-[#667781] text-sm mt-0.5">{produit.description}</p>
-                <p className="text-[#25D366] font-bold text-lg mt-1 mb-3">{formatPrix(produit.prix)}</p>
+              <div className="p-3 flex flex-col flex-1">
+                <p className="font-bold text-[#1A1A1A] text-sm leading-tight line-clamp-2">{produit.nom}</p>
+                <p className="text-[#667781] text-xs mt-0.5 line-clamp-1">{produit.description}</p>
+                <p className="text-[#25D366] font-bold text-base mt-1 mb-2">{formatPrix(produit.prix)}</p>
 
                 <button
                   onClick={() => ouvrirFormulaire(produit)}
-                  className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-3 rounded-xl text-sm transition-colors"
+                  className="w-full bg-[#25D366] active:bg-[#1db857] text-white font-bold py-2.5 rounded-xl text-sm mt-auto"
                 >
                   Commander
                 </button>
