@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { getUtilisateur } from "./auth";
 
 export type Produit = {
   nom: string;
@@ -53,6 +54,8 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<void> {
   if (!supabase) return; // Supabase non configuré → localStorage suffit
 
   try {
+    const user = await getUtilisateur();
+
     // Upsert la boutique (crée ou met à jour si le slug existe déjà)
     const { error: errBoutique } = await supabase
       .from("boutiques")
@@ -66,6 +69,7 @@ export async function sauvegarderBoutique(boutique: Boutique): Promise<void> {
           description: boutique.description ?? "",
           ville: boutique.ville,
           quartier: boutique.quartier,
+          ...(user ? { user_id: user.id } : {}),
         },
         { onConflict: "slug" }
       );

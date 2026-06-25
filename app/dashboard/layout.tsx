@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { getSession, ecouterAuth } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 const onglets = [
   {
@@ -56,10 +59,44 @@ const onglets = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [chargement, setChargement] = useState(true);
+
+  useEffect(() => {
+    /* Si Supabase n'est pas configuré : accès libre (compat MVP localStorage) */
+    if (!supabase) {
+      setChargement(false);
+      return;
+    }
+
+    /* Vérification initiale de la session */
+    getSession().then((session) => {
+      if (!session) {
+        router.replace("/login");
+      } else {
+        setChargement(false);
+      }
+    });
+
+    /* Écoute les déconnexions en temps réel */
+    const arreter = ecouterAuth((user) => {
+      if (!user) router.replace("/login");
+    });
+
+    return arreter;
+  }, [router]);
 
   function estActif(onglet: { href: string; exact: boolean }) {
     if (onglet.exact) return pathname === onglet.href;
     return pathname.startsWith(onglet.href);
+  }
+
+  if (chargement) {
+    return (
+      <div className="min-h-screen bg-[#F0F2F5] flex items-center justify-center">
+        <div className="w-8 h-8 border-[3px] border-[#25D366] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -67,7 +104,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {children}
 
       {/* Navigation fixe en bas */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E8E8E4] z-50 safe-area-pb">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E8E8E4] z-50">
         <div className="flex">
           {onglets.map((o) => {
             const actif = estActif(o);
@@ -83,9 +120,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <span className={`text-[10px] font-semibold tracking-wide ${actif ? "text-[#075E54]" : "text-[#667781]"}`}>
                   {o.label}
                 </span>
-                {actif && (
-                  <span className="absolute bottom-0 w-6 h-0.5 bg-[#075E54] rounded-full" />
-                )}
               </Link>
             );
           })}

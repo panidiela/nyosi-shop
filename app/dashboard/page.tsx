@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   getBoutiqueActuelle,
+  getBoutiquesUtilisateur,
   getProduits,
   getCommandes,
   getSlugActuel,
@@ -13,6 +14,8 @@ import {
   type CommandeDetail,
   type ProduitDB,
 } from "@/lib/dashboard";
+import { deconnecter, getUtilisateur } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 function formatPrix(n: number) {
   return n.toLocaleString("fr-FR") + " FCFA";
@@ -92,10 +95,25 @@ export default function DashboardPage() {
   const [lienCopie, setLienCopie] = useState(false);
 
   useEffect(() => {
-    const s = getSlugActuel();
-    setSlug(s);
-    if (!s) { setChargement(false); return; }
-    charger(s);
+    async function init() {
+      let s = getSlugActuel();
+      /* Si pas de slug local et Supabase actif → chercher via user_id */
+      if (!s && supabase) {
+        const user = await getUtilisateur();
+        if (user) {
+          const boutiques = await getBoutiquesUtilisateur();
+          if (boutiques.length > 0) {
+            s = boutiques[0].slug;
+            setSlugActuel(s);
+          }
+        }
+      }
+      setSlug(s);
+      if (!s) { setChargement(false); return; }
+      charger(s);
+    }
+    init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function charger(s: string) {
@@ -180,7 +198,21 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="bg-[#075E54] px-4 py-3 flex items-center justify-between sticky top-0 z-10">
         <Image src="/logo.png" alt="Nyosi" width={80} height={30} priority className="brightness-0 invert" />
-        <span className="text-white/50 text-xs">Bureau commerçant</span>
+        {supabase ? (
+          <button
+            onClick={async () => { await deconnecter(); }}
+            className="text-white/60 text-xs active:text-white flex items-center gap-1.5 py-1 px-2 rounded-lg active:bg-white/10"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Déconnexion
+          </button>
+        ) : (
+          <span className="text-white/50 text-xs">Bureau commerçant</span>
+        )}
       </div>
 
       {/* Hero */}

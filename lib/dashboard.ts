@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { getUtilisateur } from "./auth";
 
 export type StatutCommande = "en_attente" | "confirmee" | "livree" | "annulee";
 
@@ -49,6 +50,27 @@ export type BoutiqueInfo = {
   ville: string;
   quartier: string;
 };
+
+/* ── Boutiques par utilisateur ────────────────────────────────────────
+   Retourne toutes les boutiques liées au compte connecté.
+   Utile pour l'écran d'accueil quand nyosi_current_slug est absent.
+──────────────────────────────────────────────────────────────────── */
+export async function getBoutiquesUtilisateur(): Promise<BoutiqueInfo[]> {
+  if (!supabase) return [];
+  try {
+    const user = await getUtilisateur();
+    if (!user) return [];
+    const { data, error } = await supabase
+      .from("boutiques")
+      .select("slug, nom, categorie, whatsapp, facebook, description, ville, quartier")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false });
+    if (error || !data) return [];
+    return data as BoutiqueInfo[];
+  } catch {
+    return [];
+  }
+}
 
 /* ── Slug actuel ──────────────────────────────────────────────────────
    Identifie la boutique active du commerçant sur cet appareil.
